@@ -66,7 +66,7 @@ nav .active
 .breadcrumb
 {
 	margin: 0;
-	padding: 0;
+	padding: 0 0 0 15px;
 }
 main
 {
@@ -139,4 +139,14 @@ footer
 	align-items: center;
 	justify-content: center;
 	text-shadow: 0 0 1px white;
+}
+fieldset
+{
+	border: 1px dotted black;
+	padding: 5px;
+	margin: 5px;
+}
+.error
+{
+	color: red;
 }

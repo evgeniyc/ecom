@@ -31,7 +31,7 @@
 			<div id="contacts" class="col-12 col-md-3"><i class="fas fa-home"></i>Здесь контактные данные<br><i class="fas fa-phone"></i>(095)322-23-23</div>
 		</header>
 		<nav class="row nav justify-content-center">
-			<a class="nav-link" href="<?php echo site_url().'/items/index'?>">Главная</a>
+			<a class="nav-link" href="<?php echo site_url().'/cats'?>">Главная</a>
 			<a class="nav-link" href="#">Каталог</a>
 			<a class="nav-link" href="#">О нас</a>
 			<a class="nav-link" href="#">Контакты</a>
