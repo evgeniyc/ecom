@@ -1,14 +1,48 @@
-<h2><?php echo $title; ?></h2>
-<?php echo validation_errors(); ?>
+<article class="col-sm-9">
+	<h2>Создание модели</h2>
+	<fieldset>
+		<legend>Характеристики модели</legend>
+		<div class="error"><?php echo validation_errors(); ?></div>
 
-<?php echo form_open('items/create'); ?>
+		<?php echo form_open('items/create'); ?>
 
-    <label for="title">Title</label>
-    <input type="input" name="title" /><br />
+			<label for="brand">Наименование модели</label>
+			<input type="text" name="brand" size="12"><br>
+			<input type="submit" name="submit" value="Создать">
+			
+		<?php foreach($cats as $cat):
+			$options[$cat->id] = $cat->brand;
+        endforeach;
+		
+		if (isset($options)):
+			echo '<label for="cats">Выберите категорию</label> ';
+			echo form_dropdown('cats', $options);
+		endif;?><br>
 
-    <label for="descr">Description</label>
-    <textarea name="descr"></textarea><br />
+		</form>
+	</fieldset><br>
+	<fieldset>
+		<legend>Загрузка файла изображения</legend>
+		<div class="error"><?php echo $error;?></div>
 
-    <input type="submit" name="submit" value="Create item" />
+		<?php echo form_open_multipart('cats/upload');?>
+			
+		<?php foreach($cats as $cat):
+		
+		$options[$cat->id] = $cat->brand;
+        
+		endforeach;
+		
+		if (isset($options)):
+			echo '<label for="cats">Выберите категорию</label> ';
+			echo form_dropdown('cats', $options);
+		endif;?><br>
 
-</form>
+			<label for="userfile">Добавить изображение</label>
+			<input type="file" name="userfile" size="12" />
+			<br />
+			<input type="submit" value="Загрузить" />
+		</form>
+	</fieldset>
+</article>
+   

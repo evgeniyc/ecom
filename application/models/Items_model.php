@@ -6,31 +6,27 @@ class Items_model extends CI_Model {
 			$this->load->database();
 	}
 	
-	public function get_items($model = FALSE)
+	public function get_items($brand)
 	{	
-		if ($model === FALSE)
-		{
-				$query = $this->db->get('items');
-				return $query->result();
-		}
-
-		$query = $this->db->get_where('items', array('model' => $model));
+		$query = $this->db->get_where('items', array('cat' => $brand));
 		return $query->result();
 	}
 	
 	public function set_item()
 	{
-		//$this->load->helper('url');
-
 		$data = array(
 			'model' => $this->input->post('model'),
 			'descr' => $this->input->post('descr'),
 			'img' => $this->input->post('img'),
 			'cat' => $this->input->post('cat'),
-			'charact' => $this->input->post('charact'),
 		);
 
 		return $this->db->insert('items', $data);
+	}
+	
+	public function set_charact($charact, $id)
+	{
+		$this->db->update('items', array('charact' => $charact), array('id' => $id));
 	}
 	
 	public function update_item($id)
@@ -38,7 +34,6 @@ class Items_model extends CI_Model {
 		$this->load->helper('url');
 
 		$data = array(
-			'id' => $id,
 			'model' => $this->input->post('model'),
 			'descr' => $this->input->post('descr'),
 			'img' => $this->input->post('img'),
@@ -46,7 +41,7 @@ class Items_model extends CI_Model {
 			'charact' => $this->input->post('charact'),
 		);
 
-		return $this->db->replace('items', $data);
+		return $this->db->update('items', $data, array('id' => $id));
 	}
 	
 	public function delete_item($id)
