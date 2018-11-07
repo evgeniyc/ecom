@@ -15,11 +15,10 @@ class Cats extends CI_Controller {
 		$data['cats'] = $this->cats_model->get_cats();
 		
 		// add breadcrumbs
-		$this->breadcrumbs->push('Категории', '/cats');
-		$this->breadcrumbs->push('Категория', '/cats/index');
-
+		//$this->breadcrumbs->push('Категории', '/cats');
+		
 		// unshift crumb
-		$this->breadcrumbs->unshift('Главная', '/');
+		//$this->breadcrumbs->unshift('Главная', '/');
 
 		
 		$this->load->view('templates/header');
@@ -30,10 +29,10 @@ class Cats extends CI_Controller {
 
 	public function create()
 	{
-		$this->breadcrumbs->push('Категории', '/cats');
+		// add breadcrumbs
 		$this->breadcrumbs->push('Создать', '/cats/create');
 		// unshift crumb
-		$this->breadcrumbs->unshift('Главная', '/');
+		$this->breadcrumbs->unshift('Главная', '/cats');
 		
 		$this->load->library('form_validation');
 
@@ -94,4 +93,13 @@ class Cats extends CI_Controller {
 					$this->load->view('templates/footer');
 			}
         }
+		
+		public function delete($brand)
+		{
+			$this->db->delete('cats', array('brand' => $brand));
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('cats/success');
+			$this->load->view('templates/footer');
+		}
 }

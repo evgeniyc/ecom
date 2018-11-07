@@ -6,6 +6,7 @@ class Items extends CI_Controller {
 			parent::__construct();
 			$this->load->model('items_model');
 			$this->load->library('breadcrumbs');
+			$this->load->helper('url_helper');
 	}
 
 	public function index($brand)
@@ -26,32 +27,6 @@ class Items extends CI_Controller {
 		$this->load->view('items/index', $data);
 		$this->load->view('templates/footer');
 	}
-/*
-	public function view($slug = NULL)
-	{
-		$data['news_item'] = $this->news_model->get_news($slug);
-
-		if (empty($data['news_item']))
-		{
-				show_404();
-		}
-
-		$data['title'] = $data['news_item']['title'];
-
-		$this->load->view('templates/header', $data);
-		$this->load->view('news/view', $data);
-		$this->load->view('templates/footer');
-	}
-	*/
-	
-	$data = array(
-			'model' => $this->input->post('model'),
-			'descr' => $this->input->post('descr'),
-			'img' => $this->input->post('img'),
-			'cat' => $this->input->post('cat'),
-			'charact' => $this->input->post('charact'),
-		);
-		
 		
 	public function create()
 	{
@@ -60,12 +35,15 @@ class Items extends CI_Controller {
 
 		$this->form_validation->set_rules('model', 'Модель', 'required');
 		$this->form_validation->set_rules('descr', 'Описание', 'required');
+		
+		$this->load->model('cats_model');
+		$data['cats'] = $this->cats_model->get_cats();
 
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->load->view('templates/header');
 			$this->load->view('sidebars/sidebar1');
-			$this->load->view('items/create');
+			$this->load->view('items/create', $data);
 			$this->load->view('templates/footer');
 
 		}
@@ -78,4 +56,50 @@ class Items extends CI_Controller {
 			$this->load->view('templates/footer');
 		}
 	}
+	
+	public function upload()
+        {
+            $this->breadcrumbs->push('Категории', '/cats');
+			$this->breadcrumbs->push('Добавить изображение', '/cats/upload');
+			$this->breadcrumbs->unshift('Главная', '/');
+				
+			$config['upload_path']          = './assets/img/items';
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['max_size']             = 200;
+			$config['max_width']            = 1024;
+			$config['max_height']           = 768;
+			$config['overwrite']			= TRUE;
+
+			$this->load->library('upload', $config);
+			$data['cats'] = $this->cats_model->get_cats();
+			$data['error'] = '';
+			if ( ! $this->upload->do_upload('userfile'))
+			{
+				$data['error'] = $this->upload->display_errors();
+
+				$this->load->view('templates/header');
+				$this->load->view('sidebars/sidebar1');
+				$this->load->view('items/add_img', $data);
+				$this->load->view('templates/footer');
+			}
+			else
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$img = $this->upload->data('file_name');
+				$this->items_model->set_item_img($img);
+				$this->load->view('templates/header');
+				$this->load->view('sidebars/sidebar1');
+				$this->load->view('items/upload_success');
+				$this->load->view('templates/footer');
+			}
+        }
+	
+	public function delete($cat, $model)
+		{
+			$this->items_model->delete($cat, $model);
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('items/success');
+			$this->load->view('templates/footer');
+		}
 }

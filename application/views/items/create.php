@@ -6,43 +6,30 @@
 
 		<?php echo form_open('items/create'); ?>
 
-			<label for="brand">Наименование модели</label>
-			<input type="text" name="brand" size="12"><br>
-			<input type="submit" name="submit" value="Создать">
-			
 		<?php foreach($cats as $cat):
 			$options[$cat->id] = $cat->brand;
         endforeach;
 		
 		if (isset($options)):
-			echo '<label for="cats">Выберите категорию</label> ';
-			echo form_dropdown('cats', $options);
+			echo '<label for="cat">Выберите категорию</label> ';
+			echo form_dropdown('cat', $options);
 		endif;?><br>
 
+
+		<label for="brand">Введите наименование</label>
+		<input type="text" name="brand" size="12"><br>
+					
+		<label for="descr">Введите описание</label>
+		<?php $data = array(
+						'name' => 'descr',
+						'id' => 'form_descr',
+						'rows' => '10',
+						'cols' => '45',
+						);
+				echo form_textarea($data); ?><br>
+		<input type="submit" name="submit" value="Создать">
 		</form>
 	</fieldset><br>
-	<fieldset>
-		<legend>Загрузка файла изображения</legend>
-		<div class="error"><?php echo $error;?></div>
-
-		<?php echo form_open_multipart('cats/upload');?>
-			
-		<?php foreach($cats as $cat):
-		
-		$options[$cat->id] = $cat->brand;
-        
-		endforeach;
-		
-		if (isset($options)):
-			echo '<label for="cats">Выберите категорию</label> ';
-			echo form_dropdown('cats', $options);
-		endif;?><br>
-
-			<label for="userfile">Добавить изображение</label>
-			<input type="file" name="userfile" size="12" />
-			<br />
-			<input type="submit" value="Загрузить" />
-		</form>
-	</fieldset>
+	
 </article>
    

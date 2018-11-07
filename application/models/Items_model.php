@@ -17,11 +17,15 @@ class Items_model extends CI_Model {
 		$data = array(
 			'model' => $this->input->post('model'),
 			'descr' => $this->input->post('descr'),
-			'img' => $this->input->post('img'),
 			'cat' => $this->input->post('cat'),
 		);
 
 		return $this->db->insert('items', $data);
+	}
+	
+	public function set_item_img($charact, $id)
+	{
+		$this->db->update('items', array('charact' => $charact), array('id' => $id));
 	}
 	
 	public function set_charact($charact, $id)
@@ -44,8 +48,8 @@ class Items_model extends CI_Model {
 		return $this->db->update('items', $data, array('id' => $id));
 	}
 	
-	public function delete_item($id)
+	public function delete($cat, $model)
 	{
-		$this->db->delete('items', array('id' => $id));
+		$this->db->delete('items', array('cat' => $cat, 'model' => $model));
 	}
 }
