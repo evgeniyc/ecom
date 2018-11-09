@@ -16,8 +16,8 @@
 		endif;?><br>
 
 
-		<label for="brand">Введите наименование</label>
-		<input type="text" name="brand" size="12"><br>
+		<label for="model">Введите наименование</label>
+		<input type="text" name="model" size="12"><br>
 					
 		<label for="descr">Введите описание</label>
 		<?php $data = array(

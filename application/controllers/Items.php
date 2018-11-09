@@ -7,6 +7,7 @@ class Items extends CI_Controller {
 			$this->load->model('items_model');
 			$this->load->library('breadcrumbs');
 			$this->load->helper('url_helper');
+			$this->load->helper('form');
 	}
 
 	public function index($brand)
