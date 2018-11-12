@@ -24,7 +24,8 @@
 			<label for="userfile">Добавить изображение</label>
 			<input type="file" name="userfile" size="12" />
 			<br />
-			<input type="submit" value="Загрузить" />
+			<?php $sub = (empty($models)) ? "Загрузить модели" : "Сохранить"; ?>
+			<input type="submit" value="<?php echo $sub; ?>" />
 		</form>
 	</fieldset>
 </article>

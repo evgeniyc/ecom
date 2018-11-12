@@ -102,16 +102,9 @@ section
 	padding: 5px;
 	align-items: stretch;
 	box-shadow: 0 0 2px black;
-	width: inherit;
 	height: 230px;
-	overflow: hidden;
-	
+}
 
-}
-#item :hover
-{
-	overflow: visible;
-}
 #item-title
 {
 	height: 13%;
@@ -119,7 +112,7 @@ section
 }
 #item-img
 {
-	height: 87%;
+	height: 60%;
 }
 #item-img img
 {
@@ -128,7 +121,14 @@ section
 }
 #item-descr
 {
+	height: 27%;
 	overflow: hidden;
+}
+#item-descr :hover
+{
+	position: absolute;
+	overflow: visible;
+	height: 100%;
 }
 
 footer

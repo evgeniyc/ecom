@@ -14,7 +14,7 @@ class Items extends CI_Controller {
 	{
 		$data['items'] = $this->items_model->get_items($brand);
 		$cat = $this->items_model->get_cat($brand);
-		$data['cat'] = $cat;
+		$data['cat'] = $cat->brand;
 		
 		// add breadcrumbs
 		$this->breadcrumbs->push('Категория '.$cat->brand, '/items/index');
