@@ -6,15 +6,19 @@
 
 		<?php echo form_open_multipart('items/upload');?>
 			
-		<?php foreach($models as $model):
-		
-		$options[$cat->id] = $cat->brand;
+		<?php foreach($cats as $cat)
+			$options[$cat->id] = $cat->brand;
         
-		endforeach;
-		
 		if (isset($options)):
-			echo '<label for="cats">Выберите категорию</label> ';
+			echo '<label for="cats">Выберите категорию: </label> ';
 			echo form_dropdown('cats', $options);
+		endif;?><br>
+		<?php foreach($models as $model)
+			$opt[$model->id] = $model->model;
+        
+		if (isset($opt)):
+			echo '<label for="models">Выберите модель: </label> ';
+			echo form_dropdown('models', $opt);
 		endif;?><br>
 
 			<label for="userfile">Добавить изображение</label>

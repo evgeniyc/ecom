@@ -11,15 +11,15 @@
         endforeach;
 		
 		if (isset($options)):
-			echo '<label for="cat">Выберите категорию</label> ';
+			echo '<label for="cat">Выберите категорию: </label> ';
 			echo form_dropdown('cat', $options);
 		endif;?><br>
 
 
-		<label for="model">Введите наименование</label>
+		<label for="model">Введите наименование: </label>
 		<input type="text" name="model" size="12"><br>
 					
-		<label for="descr">Введите описание</label>
+		<label for="descr">Введите описание: </label><br>
 		<?php $data = array(
 						'name' => 'descr',
 						'id' => 'form_descr',
@@ -30,6 +30,6 @@
 		<input type="submit" name="submit" value="Создать">
 		</form>
 	</fieldset><br>
-	
+	<p><?php echo anchor('items/upload', 'Добавить изображение'); ?></p>
 </article>
    

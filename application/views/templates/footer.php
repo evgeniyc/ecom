@@ -14,6 +14,20 @@
 			if($(this).attr("href") == addr)
 				$(this).addClass("active");
 		});
+	/*	$("#a_add_img").mouseover(function(){ 
+			var val = $( "select[name='cat']" ).val(); 
+			var a = $( "#a_add_img"); 
+			var a_text = a.attr("href"); 
+			var arr = a_text.split("/");
+			if(arr.length > 2)
+			{
+				arr = arr.slice(0,2);
+				a_text = arr.join("/");
+			}
+			a_text = a_text + "/" + val;
+			a.attr("href", a_text);
+			});
+	*/		
 	</script>
 	</body>
 </html>
