@@ -4,7 +4,7 @@
 		<?php foreach ($items as $item): ?>
 			<div class="col-sm-6 col-md-4 col-lg-3 items-row">
 				<div class="item">
-					<a href="../item/view">
+					<a href="/ci/item/view/<?php echo $item->id; ?>">
 						<div class="item-title"><?php echo $item->model;?><span><?php echo $item->price;?>грн.</span></div>
 						<div class="item-img"><img src="<?php echo base_url()."assets/img/items/".$item->img; ?>" alt=""></div>
 						<div class="item-descr"><?php echo $item->descr; ?></div>
