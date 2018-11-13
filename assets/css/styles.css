@@ -102,7 +102,8 @@ section
 	padding: 5px;
 	align-items: stretch;
 	box-shadow: 0 0 2px black;
-	height: 230px;
+	width: 100%;
+	
 }
 
 #item-title
@@ -112,7 +113,7 @@ section
 }
 #item-img
 {
-	height: 60%;
+	height: 87%;
 }
 #item-img img
 {
