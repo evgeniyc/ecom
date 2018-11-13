@@ -30,6 +30,5 @@
 		<input type="submit" name="submit" value="Создать">
 		</form>
 	</fieldset><br>
-	<p><?php echo anchor('items/upload', 'Добавить изображение'); ?></p>
 </article>
    
