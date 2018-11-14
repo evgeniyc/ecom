@@ -6,37 +6,36 @@ class Item_model extends CI_Model {
 			$this->load->database();
 	}
 	
-	public function get_items($code)
+	public function get_item($model)
 	{	
-		$query = $this->db->get_where('items', array('code' => $code));
-		return $query->result();
+		$query = $this->db->get_where('item', array('model' => $model));
+		return $query->row();
 	}
 	
 	public function set_item()
 	{
-		//$this->load->helper('url');
-
 		$data = array(
-			'code' => $this->input->post('model'),
-			'price' => $this->input->post('descr'),
-			'quant' => $this->input->post('img'),
+			'model' => $this->input->post('model'),
 		);
 
 		return $this->db->insert('item', $data);
 	}
 	
+	public function set_img
+	{
+		$id = $this->input->post('models');
+		$this->db->update('items', array('img' => $img), 'id ='.$id);
+	}
+	
 	public function update_item($id)
 	{
-		$this->load->helper('url');
-
 		$data = array(
-			'id' => $id,
-			'code' => $this->input->post('model'),
-			'price' => $this->input->post('descr'),
-			'quant' => $this->input->post('img'),
+			'model' => $this->input->post('model'),
+			'charact' => $this->input->post('charact'),
+			'quant' => $this->input->post('quant'),
 		);
 
-		return $this->db->replace('item', $data);
+		return $this->db->update('item', $data, "id = ".$id);
 	}
 	
 	public function delete_item($id)

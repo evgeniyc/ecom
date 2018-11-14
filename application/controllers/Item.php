@@ -65,7 +65,7 @@ class Items extends CI_Controller {
 		$this->breadcrumbs->push('Добавить изображение', '/cats/upload');
 		$this->breadcrumbs->unshift('Главная', '/');
 			
-		$config['upload_path']          = './assets/img/item';
+		$config['upload_path']          = './assets/img/items';
 		$config['allowed_types']        = 'gif|jpg|png';
 		$config['max_size']             = 200;
 		$config['max_width']            = 1024;
