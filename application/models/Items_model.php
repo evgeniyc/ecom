@@ -6,6 +6,18 @@ class Items_model extends CI_Model {
 			$this->load->database();
 	}
 	
+	public function get_all_items()
+	{	
+		$query = $this->db->get('items');
+		return $query->result();
+	}
+	
+	public function get_item($id)
+	{	
+		$query = $this->db->get_where('items', array('id' => $id));
+		return $query->row();
+	}
+	
 	public function get_items($brand)
 	{	
 		$query = $this->db->get_where('items', array('cat' => $brand));
@@ -19,6 +31,7 @@ class Items_model extends CI_Model {
 			'model' => $this->input->post('model'),
 			'thumb' => $img,
 			'descr' => $this->input->post('descr'),
+			'price' => $this->input->post('price'),
 		);
 
 		return $this->db->insert('items', $data);
@@ -29,6 +42,13 @@ class Items_model extends CI_Model {
 		$cat = $this->input->post('cats');
 		$query = $this->db->get_where('items', array('cat' => $cat));
 		return $query->result();
+	}
+	
+	public function get_model()
+	{
+		$model = $this->input->post('model');
+		$query = $this->db->get_where('items', array('model' => $model));
+		return $query->row();
 	}
 	
 	public function get_cat($id)
@@ -48,23 +68,19 @@ class Items_model extends CI_Model {
 		$this->db->update('items', array('charact' => $charact), 'id ='.$id);
 	}
 	
-	public function update_item($id)
+	public function update_item()
 	{
-		$this->load->helper('url');
-
+		$model = $this->input->post('model');
 		$data = array(
-			'model' => $this->input->post('model'),
 			'descr' => $this->input->post('descr'),
-			'img' => $this->input->post('img'),
 			'cat' => $this->input->post('cat'),
-			'charact' => $this->input->post('charact'),
 		);
-
-		return $this->db->update('items', $data, 'id ='.$id);
+		return $this->db->update('items', $data, 'model ='.$model);
 	}
 	
-	public function delete($cat, $model)
+	public function delete()
 	{
-		$this->db->delete('items', array('cat' => $cat, 'model' => $model));
+		$model = $this->input->post('model');
+		$this->db->delete('items', array('model' => $model));
 	}
 }

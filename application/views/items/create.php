@@ -4,7 +4,7 @@
 		<legend>Создание модели</legend>
 		<div class="error"><?php echo validation_errors(); ?></div>
 		
-		<?php echo form_open_multipart('items/upload');?>
+		<?php echo form_open_multipart('items/create');?>
 			
 		<?php foreach($cats as $cat)
 			$options[$cat->id] = $cat->brand;
@@ -26,6 +26,9 @@
 		<div class="error"><?php echo $error;?></div>
 		<label for="userfile">Выберите изображение</label>
 		<input type="file" name="userfile" size="12" /><br />
+		
+		<label for="price">Введите цену: </label>
+		<input type="text" name="price" size="6"><span> грн.</span><br>
 		
 		<input type="submit" value="Сохранить" />
 		</form>
