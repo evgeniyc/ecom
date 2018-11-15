@@ -1,9 +1,9 @@
 <article class="col-sm-9">
 	<h2>Добавление изображений модели</h2>
 <fieldset>
-		<legend>Загрузка файла изображения</legend>
-		<div class="error"><?php echo $error;?></div>
-
+		<legend>Создание модели</legend>
+		<div class="error"><?php echo validation_errors(); ?></div>
+		
 		<?php echo form_open_multipart('items/upload');?>
 			
 		<?php foreach($cats as $cat)
@@ -13,19 +13,21 @@
 			echo '<label for="cats">Выберите категорию: </label> ';
 			echo form_dropdown('cats', $options);
 		endif;?><br>
-		<?php foreach($models as $model)
-			$opt[$model->id] = $model->model;
-        
-		if (isset($opt)):
-			echo '<label for="models">Выберите модель: </label> ';
-			echo form_dropdown('models', $opt);
-		endif;?><br>
+		
+		<label for="model">Введите наименование модели: </label>
+		<input type="text" name="model" size="12"><br>
+		
+        <br><label for="descr">Введите описание: </label><br>
+		<?php	$data = array(
+						'name' => 'descr',
+						);
+				echo form_textarea($data); ?><br>
 
-			<label for="userfile">Добавить изображение</label>
-			<input type="file" name="userfile" size="12" />
-			<br />
-			<?php $sub = (empty($models)) ? "Загрузить модели" : "Сохранить"; ?>
-			<input type="submit" value="<?php echo $sub; ?>" />
+		<div class="error"><?php echo $error;?></div>
+		<label for="userfile">Выберите изображение</label>
+		<input type="file" name="userfile" size="12" /><br />
+		
+		<input type="submit" value="Сохранить" />
 		</form>
 	</fieldset>
 </article>

@@ -1,10 +1,10 @@
 <?php
-class Items extends CI_Controller {
+class Item extends CI_Controller {
 
 	public function __construct()
 	{
 			parent::__construct();
-			$this->load->model('items_model');
+			$this->load->model('item_model');
 			$this->load->library('breadcrumbs');
 			$this->load->helper('url_helper');
 			$this->load->helper('form');
@@ -12,12 +12,13 @@ class Items extends CI_Controller {
 
 	public function index($brand)
 	{
-		$data['items'] = $this->items_model->get_items($brand);
+		$data['items'] = $this->items_model->get_item($brand);
 		$cat = $this->items_model->get_cat($brand);
 		$data['cat'] = $cat->brand;
 		
 		// add breadcrumbs
 		$this->breadcrumbs->push('Категория '.$cat->brand, '/items/index');
+		$this->breadcrumbs->push('Модель '.$cat->brand, '/items/index');
 
 		// unshift crumb
 		$this->breadcrumbs->unshift('Главная', '/cats');
@@ -65,7 +66,7 @@ class Items extends CI_Controller {
 		$this->breadcrumbs->push('Добавить изображение', '/cats/upload');
 		$this->breadcrumbs->unshift('Главная', '/');
 			
-		$config['upload_path']          = './assets/img/items';
+		$config['upload_path']          = './assets/img/item';
 		$config['allowed_types']        = 'gif|jpg|png';
 		$config['max_size']             = 200;
 		$config['max_width']            = 1024;
@@ -74,26 +75,27 @@ class Items extends CI_Controller {
 
 		$this->load->library('upload', $config);
 		$this->load->model('cats_model');
+		$this->load->model('items_model');
 		$data['cats'] = $this->cats_model->get_cats();
 		$data['models'] = $this->items_model->get_models();
 		$data['error'] = '';
-		if ( ! $this->upload->do_upload('userfile'))
+		if ( ! $this->upload->do_upload('userfile') || empty($data['cats']) || empty($data['models']))
 		{
 			$data['error'] = $this->upload->display_errors();
 
 			$this->load->view('templates/header');
 			$this->load->view('sidebars/sidebar1');
-			$this->load->view('items/add_img', $data);
+			$this->load->view('item/add_img', $data);
 			$this->load->view('templates/footer');
 		}
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
 			$img = $this->upload->data('file_name');
-			$this->items_model->set_item_img($img);
+			$this->item_model->set_item($img);
 			$this->load->view('templates/header');
 			$this->load->view('sidebars/sidebar1');
-			$this->load->view('items/success');
+			$this->load->view('item/success');
 			$this->load->view('templates/footer');
 		}
 	}

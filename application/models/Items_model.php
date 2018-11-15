@@ -12,12 +12,13 @@ class Items_model extends CI_Model {
 		return $query->result();
 	}
 	
-	public function set_item()
+	public function set_item($img)
 	{
 		$data = array(
+			'cat' => $this->input->post('cats'),
 			'model' => $this->input->post('model'),
+			'thumb' => $img,
 			'descr' => $this->input->post('descr'),
-			'cat' => $this->input->post('cat'),
 		);
 
 		return $this->db->insert('items', $data);

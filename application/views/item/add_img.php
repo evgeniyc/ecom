@@ -4,7 +4,7 @@
 		<legend>Загрузка файла изображения</legend>
 		<div class="error"><?php echo $error;?></div>
 
-		<?php echo form_open_multipart('items/upload');?>
+		<?php echo form_open_multipart('item/upload');?>
 			
 		<?php foreach($cats as $cat)
 			$options[$cat->id] = $cat->brand;
@@ -19,12 +19,17 @@
 		if (isset($opt)):
 			echo '<label for="models">Выберите модель: </label> ';
 			echo form_dropdown('models', $opt);
-		endif;?><br>
-
-			<label for="userfile">Добавить изображение</label>
-			<input type="file" name="userfile" size="12" />
-			<br />
-			<?php $sub = (empty($models)) ? "Загрузить модели" : "Сохранить"; ?>
+			echo '<br><label for="descr">Введите описание: </label><br>';
+			$data = array(
+						'name' => 'descr',
+						);
+			echo form_textarea($data); 
+			echo '<br>';
+				
+			echo '<label for="userfile">Добавить изображение</label>';
+			echo '<input type="file" name="userfile" size="12" /><br />';
+		endif;
+			$sub = (empty($models)) ? "Загрузить" : "Сохранить"; ?>
 			<input type="submit" value="<?php echo $sub; ?>" />
 		</form>
 	</fieldset>
