@@ -10,5 +10,16 @@
 			<?php echo $item->descr; ?>
 		</div>
 	</div>
-	<div id="item-charact" class="row"><?php //echo $item-charact; ?></div>
+	<div id="item-charact" class="row">
+		<div id="charact" class="col-xs-12">
+			<h4><center>Характеристики</center></h4>
+			<?php 	
+				$template = array('table_open'  => '<table class="table-bordered">');
+				$this->table->set_template($template);
+				$this->table->set_heading('Размеры', 'Диагональ', 'Тип дисплея', 'Размер камеры', 'Емкость батареи', 'Вес');
+				$this->db->select('dims, disp, disp_type, cam_size, bat, weight');
+				$query = $this->db->get_where('charact', array('id' => $item->charact));
+				echo $this->table->generate($query); ?>
+		</div>
+	</div>
 </article>

@@ -33,6 +33,7 @@ class Items extends CI_Controller {
 	
 	public function view($id)
 	{
+		$this->load->library('table');
 		$item = $this->items_model->get_item($id);
 		$cat = $this->items_model->get_cat($item->cat);
 		$data['cat'] = $cat->brand;
@@ -134,6 +135,48 @@ class Items extends CI_Controller {
 		else
 		{
 			$this->items_model->update_item();
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('items/success');
+			$this->load->view('templates/footer');
+		}
+	}
+	
+	public function editImg()
+	{
+		$this->breadcrumbs->push('Категории', '/cats');
+		$this->breadcrumbs->push('Редактировать', '/items/update');
+		$this->breadcrumbs->unshift('Главная', '/');
+			
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('model', 'Модель', 'required');
+				
+		$config['upload_path']          = './assets/img/items';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 200;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+		$config['overwrite']			= TRUE;
+
+		$this->load->library('upload', $config);
+		$this->load->model('cats_model');
+		$data['cats'] = $this->cats_model->get_cats();
+		$data['models'] = $this->items_model->get_models();
+					
+		$data['error'] = '';
+		if ( ! $this->upload->do_upload('userfile') || $this->form_validation->run() === FALSE)
+		{
+			$data['error'] = $this->upload->display_errors();
+
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('items/edit_img', $data);
+			$this->load->view('templates/footer');
+		}
+		else
+		{
+			$this->items_model->edit_item_img();
 			$this->load->view('templates/header');
 			$this->load->view('sidebars/sidebar1');
 			$this->load->view('items/success');

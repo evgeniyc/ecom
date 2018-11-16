@@ -180,6 +180,26 @@ section
 	font-size: 0.8em;
 	
 }
+.buy
+{
+	visibility: hidden;
+}
+.item a:hover .buy
+{
+	visibility: visible;
+}
+#item img
+{
+	width: 100%;
+}
+#charact
+{
+	padding: 15px;
+}
+#charact td
+{
+	color: red;
+}
 
 footer
 {

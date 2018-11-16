@@ -9,6 +9,9 @@
 						<div class="item-img"><img src="<?php echo base_url()."assets/img/items/".$item->img; ?>" alt=""></div>
 						<div class="item-descr"><?php echo $item->descr; ?></div>
 					</a>
+					<div class="buttons">
+						<button class="buy">Купить</button>
+					</div>
 				</div>
 			</div>
 		<?php endforeach; ?>

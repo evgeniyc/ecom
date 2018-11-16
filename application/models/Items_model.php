@@ -37,6 +37,13 @@ class Items_model extends CI_Model {
 		return $this->db->insert('items', $data);
 	}
 	
+	public function edit_item_img()
+	{
+		$img = $this->upload->data('file_name');
+		$id = $this->input->post('model');
+		return $this->db->update('items', array('img' => $img), 'id ='.$id);
+	}
+	
 	public function get_models()
 	{
 		$cat = $this->input->post('cats');
@@ -46,8 +53,8 @@ class Items_model extends CI_Model {
 	
 	public function get_model()
 	{
-		$model = $this->input->post('model');
-		$query = $this->db->get_where('items', array('model' => $model));
+		$id = $this->input->post('model');
+		$query = $this->db->get_where('items', array('id' => $id));
 		return $query->row();
 	}
 	
