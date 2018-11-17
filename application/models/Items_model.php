@@ -53,7 +53,7 @@ class Items_model extends CI_Model {
 	
 	public function get_model()
 	{
-		$id = $this->input->post('model');
+		$id = $this->input->post('mod');
 		$query = $this->db->get_where('items', array('id' => $id));
 		return $query->row();
 	}
@@ -70,24 +70,56 @@ class Items_model extends CI_Model {
 		$this->db->update('items', array('img' => $img), 'id ='.$id);
 	}
 	
-	public function set_charact($charact, $id)
+	public function set_charact()
 	{
-		$this->db->update('items', array('charact' => $charact), 'id ='.$id);
+		$data = array(
+			'id' => $this->input->post('mod'),
+			'dims' => $this->input->post('dims'),
+			'disp' => $this->input->post('disp'),
+			'disp_type' => $this->input->post('disp_type'),
+			'cam_size' => $this->input->post('cam_size'),
+			'bat' => $this->input->post('bat'),
+			'weight' => $this->input->post('weight'),
+		);
+		$this->db->insert('charact', $data);
+	}
+	
+	public function update_charact()
+	{
+		$id = $this->input->post('id');
+		$data = array(
+			'dims' => $this->input->post('dims'),
+			'disp' => $this->input->post('disp'),
+			'disp_type' => $this->input->post('disp_type'),
+			'cam_size' => $this->input->post('cam_size'),
+			'bat' => $this->input->post('bat'),
+			'weight' => $this->input->post('weight'),
+		);
+		$this->db->update('charact', $data, 'id='.$id);
+	}
+	
+	public function get_charact()
+	{
+		$id = $this->input->post('mod');
+		$query = $this->db->get_where('charact', array('id' => $id));
+		return $query->row();
 	}
 	
 	public function update_item()
 	{
-		$model = $this->input->post('model');
+		$id = $this->input->post('mod');
 		$data = array(
+			'model' => $this->input->post('model'),
 			'descr' => $this->input->post('descr'),
-			'cat' => $this->input->post('cat'),
+			'cat' => $this->input->post('cats'),
 		);
-		return $this->db->update('items', $data, 'model ='.$model);
+		return $this->db->update('items', $data, 'id ='.$id);
 	}
 	
 	public function delete()
 	{
-		$model = $this->input->post('model');
-		$this->db->delete('items', array('model' => $model));
+		$model = $this->input->post('id');
+		$this->db->delete('items', array('id' => $id));
+		$this->db->delete('charact', array('id' => $id));
 	}
 }

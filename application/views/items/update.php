@@ -4,7 +4,7 @@
 		<legend>Выберите категорию</legend>
 		<div class="error"><?php echo validation_errors(); ?></div>
 		
-		<?php echo form_open_multipart('items/update');?>
+		<?php echo form_open('items/update');?>
 			
 			<?php foreach($cats as $cat)
 				$options[$cat->id] = $cat->brand;
@@ -17,8 +17,8 @@
 			<?php 	if (!empty($models)):
 						foreach($models as $mod)
 							$opt[$mod->id] = $mod->model;
-						echo '<label for="model">Выберите модель: </label> ';
-						echo form_dropdown('model', $opt);
+						echo '<label for="mod">Выберите модель: </label> ';
+						echo form_dropdown('mod', $opt);
 					endif;
 					if (!empty($model)):
 						echo '<br><label for="model">Отредактируйте наименование модели: </label>';
@@ -29,14 +29,11 @@
 							);
 						$value = $model->descr;
 						echo form_textarea($data, $model->descr).'<br>';	
-						echo '<div class="error">';
-						echo $error .'</div>';
-						echo '<label for="userfile">Изображение</label>';
-						echo form_upload(array('name' => 'userfile'), $model->thumb);
 						echo '<br><label for="price">Цена: </label>';
 						echo form_input('price', $model->price) . '<span> грн.</span><br>';
 					endif;
 			echo form_submit('submit', empty($model) ? 'Догрузить' : 'Сохранить');
 		echo form_close();?>
 	</fieldset>
+			<?php 	echo anchor('items/editimg', 'Изменить изображение'); ?>
 </article>

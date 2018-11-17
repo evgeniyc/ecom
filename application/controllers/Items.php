@@ -123,10 +123,8 @@ class Items extends CI_Controller {
 		$data['model'] = $this->items_model->get_model();
 			
 		$data['error'] = '';
-		if ( ! $this->upload->do_upload('userfile') || $this->form_validation->run() === FALSE)
+		if ($this->form_validation->run() === FALSE)
 		{
-			$data['error'] = $this->upload->display_errors();
-
 			$this->load->view('templates/header');
 			$this->load->view('sidebars/sidebar1');
 			$this->load->view('items/update', $data);
@@ -184,12 +182,124 @@ class Items extends CI_Controller {
 		}
 	}
 	
-	public function delete($cat, $model)
+	public function charact()
 	{
-		$this->items_model->delete($cat, $model);
+		
+		$this->breadcrumbs->push('Категории', '/cats');
+		$this->breadcrumbs->push('Категория', 'items/index');
+		$this->breadcrumbs->push('Добавить характеристики', '/items/charact');
+		$this->breadcrumbs->unshift('Главная', '/');
+			
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('mod', 'Модель', 'required');
+		
+		$this->load->model('cats_model');
+		$data['cats'] = $this->cats_model->get_cats();
+		$data['models'] = $this->items_model->get_models();
+		
+		if ( $this->form_validation->run() === FALSE )
+		{
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('items/add_charact', $data);
+			$this->load->view('templates/footer');
+		}
+		else
+		{
+			$this->items_model->set_charact();
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('items/success');
+			$this->load->view('templates/footer');
+		}
+	}
+	
+	public function updateCharact()
+	{
+		$this->breadcrumbs->push('Категории', '/cats');
+		$this->breadcrumbs->push('Редактировать характеристики', '/items/update');
+		$this->breadcrumbs->unshift('Главная', '/');
+			
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('dims', 'Размеры', 'required');
+		
+		$this->load->model('cats_model');
+		$data['cats'] = $this->cats_model->get_cats();
+		$data['models'] = $this->items_model->get_models();
+		$data['charact'] = $this->items_model->get_charact();
+			
+		if ($this->form_validation->run() === FALSE)
+		{
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('items/edit_charact', $data);
+			$this->load->view('templates/footer');
+		}
+		else
+		{
+			$this->items_model->update_charact();
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('items/success');
+			$this->load->view('templates/footer');
+		}
+	}
+	
+	public function delete()
+	{
+		$this->items_model->delete();
 		$this->load->view('templates/header');
 		$this->load->view('sidebars/sidebar1');
 		$this->load->view('items/success');
 		$this->load->view('templates/footer');
 	}
+	
+	public function ajaxtest()
+	{
+		$this->load->view('templates/header');
+		$this->load->view('sidebars/sidebar1');
+		$this->load->view('items/ajax');
+		$this->load->view('templates/footer');
+	}
+	
+	public function resp()
+	{
+		$this->load->library('cart');
+		$data = array(
+        'id'      => $this->input->post('id'),
+        'qty'     => $this->input->post('qty'),
+        'price'   => $this->input->post('price'),
+        'name'    => $this->input->post('name'),
+		// 'options' => array('Size' => 'L', 'Color' => 'Red'),
+		);
+		$this->cart->insert($data);
+		echo 'Позиция успешно добавлена в корзину.';
+	}
+	
+	public function cart()
+	{
+		$this->load->view('templates/header');
+		$this->load->view('sidebars/sidebar1');
+		$this->load->view('items/cart');
+		$this->load->view('templates/footer');
+	}
+	
+	public function cartUpdate()
+	{
+		$data = $this->input->post();
+		$this->cart->update($data);
+		$this->load->view('templates/header');
+		$this->load->view('sidebars/sidebar1');
+		$this->load->view('items/cart');
+		$this->load->view('templates/footer');
+	}
+	
+	public function zorder()
+	{
+		$this->cart->destroy();
+		redirect('/ci/cats/index');
+	}
+	
 }

@@ -42,9 +42,9 @@ header
 	position: relative;
 	top: -4px;
 }
-#search-form
+#cart_link
 {
-	
+	color: #FFFF73;
 }
 
 #contacts
@@ -183,14 +183,32 @@ section
 .buy
 {
 	visibility: hidden;
+	position: relative;
+	left: 30%;
+	top: -60px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px black;
+	
 }
-.item a:hover .buy
+#buy
+{
+	border-radius: 5px;
+	box-shadow: 0 0 5px black;
+}
+.item:hover .buy
 {
 	visibility: visible;
+	
 }
 #item img
 {
 	width: 100%;
+}
+#item-price
+{
+	font-size: 1.3em;
+	color: red;
+	padding: 15px;
 }
 #charact
 {
@@ -199,6 +217,10 @@ section
 #charact td
 {
 	color: red;
+}
+#result
+{
+	color: yellow;
 }
 
 footer

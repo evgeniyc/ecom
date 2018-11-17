@@ -3,7 +3,7 @@
 		<?php foreach ($cats as $cat): ?>
 			<div class="col-sm-6 col-md-4 col-lg-3 items-row">
 				<div class="cat">
-					<a href="<?php echo "items/index/".$cat->id;?>">
+					<a href="<?php echo base_url()."items/index/".$cat->id;?>">
 						<div class="cat-title"><?php echo $cat->brand;?></div>
 						<div class="cat-img"><img src="<?php echo base_url()."assets/img/logo/".$cat->img; ?>" alt=""></div>
 					</a>
