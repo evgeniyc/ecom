@@ -5,7 +5,6 @@ class Items extends CI_Controller {
 	{
 			parent::__construct();
 			$this->load->model('items_model');
-			$this->load->library('breadcrumbs');
 			$this->load->helper('url_helper');
 			$this->load->helper('form');
 	}
@@ -88,9 +87,7 @@ class Items extends CI_Controller {
 		}
 		else
 		{
-			$data = array('upload_data' => $this->upload->data());
-			$img = $this->upload->data('file_name');
-			$this->items_model->set_item($img);
+			$this->items_model->set_item();
 			$this->load->view('templates/header');
 			$this->load->view('sidebars/sidebar1');
 			$this->load->view('items/success');
@@ -256,14 +253,7 @@ class Items extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
-	public function ajaxtest()
-	{
-		$this->load->view('templates/header');
-		$this->load->view('sidebars/sidebar1');
-		$this->load->view('items/ajax');
-		$this->load->view('templates/footer');
-	}
-	
+	//Добавление позиции в корзину (Ajax)
 	public function resp()
 	{
 		$this->load->library('cart');
@@ -272,12 +262,12 @@ class Items extends CI_Controller {
         'qty'     => $this->input->post('qty'),
         'price'   => $this->input->post('price'),
         'name'    => $this->input->post('name'),
-		// 'options' => array('Size' => 'L', 'Color' => 'Red'),
 		);
 		$this->cart->insert($data);
 		echo 'Позиция успешно добавлена в корзину.';
 	}
 	
+	//Содержание корзины
 	public function cart()
 	{
 		$this->load->view('templates/header');
@@ -286,6 +276,7 @@ class Items extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
+	//Обновление содержания корзины по данным формы
 	public function cartUpdate()
 	{
 		$data = $this->input->post();
@@ -296,10 +287,17 @@ class Items extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
+	//Удаление всех элементов корзины
 	public function zorder()
 	{
 		$this->cart->destroy();
-		redirect('/ci/cats/index');
+		redirect('cats/index');
+	}
+	
+	//Передача данных в заказы (заказ Старт)
+	public function order()
+	{
+		
 	}
 	
 }

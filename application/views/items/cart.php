@@ -42,6 +42,5 @@
 
 <p><?php echo form_submit('', 'Обновить'); ?></p>
 </form>
-<a href="/ci/items/order"><button>Оформить заказ</button></a><a href="/ci/items/zorder"> <button>Удалить все</button></a>
-<?php print_r($this->cart->contents());?>				
+<a href="items/order"><button>Оформить заказ</button></a><a href="items/zorder"> <button>Удалить все</button></a>
 </article>

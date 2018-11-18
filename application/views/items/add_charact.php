@@ -30,42 +30,42 @@
                 'maxlength' => '12',
 				'size' => '12',
 			);
-			echo form_input('dims').'<br>';
+			echo form_input($data).'<br>';
 			echo form_label('Диагональ: ', 'disp');
 			$data = array(
 				'name' => 'disp',
                 'maxlength' => '5',
 				'size' => '5',
 			);
-			echo form_input('disp').'<br>';
+			echo form_input($data).'<br>';
 			echo form_label('Технология митрицы: ', 'disp_type');
 			$data = array(
 				'name' => 'disp_type',
                 'maxlength' => '5',
 				'size' => '5',
 			);
-			echo form_input('disp_type').'<br>';
+			echo form_input($data).'<br>';
 			echo form_label('Размер камеры: ', 'cam_size');
 			$data = array(
 				'name' => 'cam_size',
                 'maxlength' => '5',
 				'size' => '5',
 			);
-			echo form_input('cam_size').'<br>';
+			echo form_input($data).'<br>';
 			echo form_label('Емкость батареи: ', 'bat');
 			$data = array(
 				'name' => 'bat',
                 'maxlength' => '5',
 				'size' => '5',
 			);
-			echo form_input('bat').'<br>';
+			echo form_input($data).'<br>';
 			echo form_label('Вес: ', 'weight');
 			$data = array(
 				'name' => 'weight',
                 'maxlength' => '5',
 				'size' => '5',
 			);
-			echo form_input('weight').'<br>';
+			echo form_input($data).'<br>';
 					endif;?>	
 		<input type="submit" value="<?php echo empty($models) ? 'Загрузить модель' : 'Сохранить';?>" />
 		</form>

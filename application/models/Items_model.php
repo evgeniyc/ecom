@@ -6,30 +6,34 @@ class Items_model extends CI_Model {
 			$this->load->database();
 	}
 	
+	//Все строки модели
 	public function get_all_items()
 	{	
 		$query = $this->db->get('items');
 		return $query->result();
 	}
 	
+	//Получение одной позиции по идентификатору
 	public function get_item($id)
 	{	
 		$query = $this->db->get_where('items', array('id' => $id));
 		return $query->row();
 	}
 	
+	//Получение позиций одной категории
 	public function get_items($brand)
 	{	
 		$query = $this->db->get_where('items', array('cat' => $brand));
 		return $query->result();
 	}
 	
-	public function set_item($img)
+	//Создание позиции
+	public function set_item()
 	{
 		$data = array(
 			'cat' => $this->input->post('cats'),
 			'model' => $this->input->post('model'),
-			'thumb' => $img,
+			'thumb' => $img = $this->upload->data('file_name'),
 			'descr' => $this->input->post('descr'),
 			'price' => $this->input->post('price'),
 		);
@@ -37,6 +41,7 @@ class Items_model extends CI_Model {
 		return $this->db->insert('items', $data);
 	}
 	
+	//Редактирование изображения позиции
 	public function edit_item_img()
 	{
 		$img = $this->upload->data('file_name');
@@ -44,6 +49,7 @@ class Items_model extends CI_Model {
 		return $this->db->update('items', array('img' => $img), 'id ='.$id);
 	}
 	
+	//Получение позиций одной категории по данным формы
 	public function get_models()
 	{
 		$cat = $this->input->post('cats');
@@ -51,6 +57,7 @@ class Items_model extends CI_Model {
 		return $query->result();
 	}
 	
+	//Получение позиции по идентификатору из формы
 	public function get_model()
 	{
 		$id = $this->input->post('mod');
@@ -58,18 +65,21 @@ class Items_model extends CI_Model {
 		return $query->row();
 	}
 	
+	//Получение данных  одной категории
 	public function get_cat($id)
 	{
 		$query = $this->db->get_where('cats', array('id' => $id));
 		return $query->row();
 	}
 	
+	//Редактирование изображения позиции
 	public function set_item_img($img)
 	{
 		$id = $this->input->post('models');
 		$this->db->update('items', array('img' => $img), 'id ='.$id);
 	}
 	
+	//Добавление характеристик позиции
 	public function set_charact()
 	{
 		$data = array(
@@ -84,6 +94,7 @@ class Items_model extends CI_Model {
 		$this->db->insert('charact', $data);
 	}
 	
+	//Редактирование характеристик позиции
 	public function update_charact()
 	{
 		$id = $this->input->post('id');
@@ -98,6 +109,7 @@ class Items_model extends CI_Model {
 		$this->db->update('charact', $data, 'id='.$id);
 	}
 	
+	//Получение характеристик позиции
 	public function get_charact()
 	{
 		$id = $this->input->post('mod');
@@ -105,6 +117,7 @@ class Items_model extends CI_Model {
 		return $query->row();
 	}
 	
+	//Редактирование данных позиции
 	public function update_item()
 	{
 		$id = $this->input->post('mod');
@@ -116,6 +129,7 @@ class Items_model extends CI_Model {
 		return $this->db->update('items', $data, 'id ='.$id);
 	}
 	
+	//Удаление позиции
 	public function delete()
 	{
 		$model = $this->input->post('id');
