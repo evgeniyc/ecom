@@ -25,50 +25,26 @@ class Users_model extends CI_Model {
 		$query = $this->db->get_where('users', array('login' => $login));
 		$user = $query->row();
 		$result = false;
-		$result = ($user->pass === md5($pass)) ? true : false;
+		if($user)
+			$result = ($user->pass === md5($pass)) ? true : false;
 		if($result):
 			$data = array(
 						'id' => $user->id,
 						'login' => $user->login,
 						'email' => $user->email,
 						'logged_in' => TRUE,
+						'status' => $user->status,
 					);
 			$this->session->set_userdata($data);
-			return true;
+			return $result;
 		else:
-			return false;
+			return $result;
 		endif;
-	}
-	
-	public function set_cat()
-	{
-		$data = array(
-			'brand' => $this->input->post('brand'),
-		);
-
-		return $this->db->insert('cats', $data);
-	}
-	
-	public function set_cat_img()
-	{
-		$id = $this->input->post('cats');
-		$img = $this->upload->data('file_name');
-		return $this->db->update('cats', array('img' => $img), "id =".$id);
-	}
-	
-	public function update_cat()
-	{
-		$id = $this->input->post('cats');
-		$data = array(
-			'brand' => $this->input->post('brand'),
-		);
-
-		return $this->db->update('cats', $data, 'id='.$id);
 	}
 	
 	public function delete()
 	{
-		$id = $this->input->post('cats');
-		$this->db->delete('cats', array('id' => $id));
+		$id = $this->input->post('login');
+		$this->db->delete('users', array('login' => $id));
 	}
 }

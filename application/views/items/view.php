@@ -21,7 +21,7 @@
 			);
 			echo form_input($data) ;?>
 			<button id="buy" onClick="send()">Добавить в корзину</button></a><br>
-			<a href="/ci/items/cart/<?php echo $item->id;?>"><button id="buy">Оформить заказ</button></a>
+			<a href="<?php echo base_url().'orders/create';?>"><button id="buy">Оформить заказ</button></a>
 			<a href="/ci"><button id="buy">На главную</button></a><br>
 			<div id="result"></div>
 		</div>

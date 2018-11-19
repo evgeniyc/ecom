@@ -32,8 +32,8 @@
 				<i class="fas fa-home"></i>Здесь контактные данные<br>
 				<i class="fas fa-phone"></i>(095)322-23-23<br>
 				<a id="cart_link" href="/ci/items/cart"><i class="fas fa-shopping-cart">&nbsp;</i><?php echo $this->cart->total_items(); ?></a>
-				<?php if($this->session->logged_in == TRUE)
-						echo 'Hello '.$this->session->login;?>
+				<?php if($this->session->logged_in)
+						echo 'Привет '.$this->session->login;?>
 			</div>
 		</header>
 		<nav class="row nav justify-content-center">

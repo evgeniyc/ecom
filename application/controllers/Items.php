@@ -5,7 +5,7 @@ class Items extends CI_Controller {
 	{
 			parent::__construct();
 			$this->load->model('items_model');
-			$this->load->helper('url_helper');
+			$this->load->helper('url');
 			$this->load->helper('form');
 	}
 
@@ -292,12 +292,6 @@ class Items extends CI_Controller {
 	{
 		$this->cart->destroy();
 		redirect('cats/index');
-	}
-	
-	//Передача данных в заказы (заказ Старт)
-	public function order()
-	{
-		
 	}
 	
 }

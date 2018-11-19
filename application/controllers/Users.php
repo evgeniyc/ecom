@@ -6,7 +6,7 @@ class Users extends CI_Controller {
 			parent::__construct();
 			$this->load->model('users_model');
 			$this->load->helper('form');
-			$this->load->helper('url_helper');
+			$this->load->helper('url');
 	}
 	 
 	 public function create()
@@ -51,7 +51,10 @@ class Users extends CI_Controller {
 			
 			$this->form_validation->set_rules('login', 'Логин',	'required');
 			$this->form_validation->set_rules('pass', 'Пароль', 'required');
-			if ($this->form_validation->run() == FALSE || $this->users_model->auth())
+			$this->form_validation->set_rules('pass', 'Пароль', 'callback_auth');
+			$this->form_validation->set_message('auth', 'Неверный пароль');
+			//if (!($this->form_validation->run()) || !($this->users_model->auth()))
+			if (!($this->form_validation->run()))
 			{
 				$this->load->view('templates/header');
 				$this->load->view('sidebars/sidebar1');
@@ -62,11 +65,44 @@ class Users extends CI_Controller {
 			{
 				redirect(base_url());
 			}
+			
+		}
+		
+		public function auth()
+		{
+			return $result = $this->users_model->auth();
 		}
 			
 		public function logout()
 		{
 			$this->session->sess_destroy();
 			redirect(base_url());
+		}
+		
+		public function delete()
+		{
+			if($this->session->status != 'admin')
+				show_404();
+			
+			$this->load->library('form_validation');
+			$this->load->helper('url');
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			
+			$this->form_validation->set_rules('login', 'Логин',	'required');
+			if (!($this->form_validation->run()))
+			{
+				$this->load->view('templates/header');
+				$this->load->view('sidebars/sidebar1');
+				$this->load->view('users/delete');
+				$this->load->view('templates/footer');
+			}
+			else
+			{
+				$this->users_model->delete();
+				$this->load->view('templates/header');
+				$this->load->view('sidebars/sidebar1');
+				$this->load->view('users/success');
+				$this->load->view('templates/footer');
+			}
 		}
 }
