@@ -44,4 +44,22 @@ class Orders extends CI_Controller {
 		$this->load->view('orders/success');
 		$this->load->view('templates/footer');
 	}
+	
+	public function liqpay()
+	{
+		$this->load->library('liqpay');
+		if($this->input->is_ajax_request()):
+			$liqpay = new LiqPay($public_key, $private_key);
+			$html = $liqpay->cnb_form(array(
+			'action'         => 'pay',
+			'amount'         => $this->input->post('amount'),
+			'currency'       => 'UAH',
+			'description'    => $this->input->post('order_descr'),
+			'order_id'       => $this->input->post('order_id'),
+			'version'        => '3'
+			));
+			echo $html;
+		else: show_404();
+		endif;
+	}
 }

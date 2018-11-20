@@ -1,8 +1,8 @@
 <article class="col-sm-9">
-	<h2>Все заказы</h2>
+	<h2>Мои заказы</h2>
 	<div id="item-charact" class="row">
 		<div id="charact" class="col-xs-12">
-			<h4><center>Заказы</center></h4>
+			<h4><center>Пользователь <?php echo $this->session->name; ?></center></h4>
 			<?php 	
 				$template = array('table_open'  => '<table class="table-bordered" cellpadding=5>');
 				$this->table->set_template($template);
