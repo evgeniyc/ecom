@@ -21,14 +21,13 @@ class Orders extends CI_Controller {
 
 	public function view()
 	{
-		$data['order'] = $this->news_model->get_order();
+		$this->load->library('table');
+		$data['orders'] = $this->orders_model->get_order();
 
-		if (empty($data['order']))
+		if (empty($data['orders']))
 		{
 				show_404();
 		}
-
-		//$data['title'] = $data['news_item']['title'];
 
 		$this->load->view('templates/header');
 		$this->load->view('sidebars/sidebar1');
@@ -45,10 +44,14 @@ class Orders extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
-	public function liqpay()
+	public function prepare()
 	{
-		$this->load->library('liqpay');
+		$public_key = 'i54475387141';
+		$private_key = 'tB1iOBjrDFMhmSifpVVD4nB36iTEwxHy2QM0juhT';
+		require('application/libraries/liqpay.php')
 		if($this->input->is_ajax_request()):
+			$public_key = i54475387141;
+			$private_key = tB1iOBjrDFMhmSifpVVD4nB36iTEwxHy2QM0juhT;
 			$liqpay = new LiqPay($public_key, $private_key);
 			$html = $liqpay->cnb_form(array(
 			'action'         => 'pay',
@@ -59,7 +62,7 @@ class Orders extends CI_Controller {
 			'version'        => '3'
 			));
 			echo $html;
-		else: show_404();
+		else: 'Error';
 		endif;
 	}
 }

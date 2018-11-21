@@ -13,16 +13,15 @@ class Orders_model extends CI_Model {
 		return $query->result_array();
 	}
 	
-	public function get_order($slug = FALSE)
+	public function get_order()
 	{	
-		if ($slug === FALSE)
+		if (!empty($this->session->id))
 		{
-				$query = $this->db->get('news');
+				$this->db->select('id, item_id, qty, price, date, user, status');
+				$query = $this->db->get_where('orders', array('user'=>$this->session->id));
 				return $query->result_array();
 		}
-
-		$query = $this->db->get_where('news', array('slug' => $slug));
-		return $query->row_array();
+		return null;
 	}
 	
 	public function set_order()
