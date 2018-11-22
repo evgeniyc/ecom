@@ -48,6 +48,6 @@ function send()
 			data.qty = $("#qty").val();
 			data.name = "<?php echo $item->model;?>";
 			data.price = "<?php echo $item->price;?>";
-			$("#result").load("/ci/items/resp", data);
+			$("#result").load("<?php echo base_url();?>items/resp", data);
 		}
 </script>

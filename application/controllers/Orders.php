@@ -21,14 +21,9 @@ class Orders extends CI_Controller {
 
 	public function view()
 	{
-		$data['order'] = $this->news_model->get_order();
-
-		if (empty($data['order']))
-		{
-				show_404();
-		}
-
-		//$data['title'] = $data['news_item']['title'];
+		$this->load->library('table');
+		
+		$data['orders'] = $this->orders_model->get_order();
 
 		$this->load->view('templates/header');
 		$this->load->view('sidebars/sidebar1');
@@ -43,5 +38,25 @@ class Orders extends CI_Controller {
 		$this->load->view('sidebars/sidebar1');
 		$this->load->view('orders/success');
 		$this->load->view('templates/footer');
+	}
+	
+	public function prepare()
+	{
+		$this->load->library('liqpay');
+		$order = $this->orders_model->get_order_amount();
+				
+		if($this->input->is_ajax_request()):
+			$html = $this->liqpay->cnb_form(array(
+			'action'         => 'pay',
+			'amount'         => $order->price*$order->qty,
+			'currency'       => 'UAH',
+			'description'    => $this->input->post('order_descr'),
+			'order_id'       => $order->id,
+			'version'        => '3'
+			));
+			echo $html;
+		else: 
+			echo 'Error';
+		endif;
 	}
 }
