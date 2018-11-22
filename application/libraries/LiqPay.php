@@ -1,4 +1,4 @@
-<?php
+ <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Liqpay Payment Module
  *
@@ -18,7 +18,7 @@
  * EXTENSION INFORMATION
  *
  * LIQPAY API       https://www.liqpay.ua/documentation/en
- *
+ * @link		https://github.com/evgeniyc/liqpay
  */
 
 /**
@@ -26,6 +26,7 @@
  *
  * @author      Liqpay <support@liqpay.ua>
  */
+ 
 class LiqPay
 {
     const CURRENCY_EUR = 'EUR';
@@ -55,20 +56,24 @@ class LiqPay
      *
      * @throws InvalidArgumentException
      */
-    public function __construct($public_key, $private_key)
-    {
-        if (empty($public_key)) {
+	 
+	 
+	 public function __construct()
+	{	
+		$this->ci =& get_instance();
+		// Load config file
+		$this->ci->load->config('liqpay');
+		if (empty($this->ci->config->item('public_key'))) {
             throw new InvalidArgumentException('public_key is empty');
         }
-
-        if (empty($private_key)) {
+		if (empty($this->ci->config->item('private_key'))) {
             throw new InvalidArgumentException('private_key is empty');
-        }
-
-        $this->_public_key = $public_key;
-        $this->_private_key = $private_key;
-    }
-
+		}
+		$this->_public_key = $this->ci->config->item('public_key');
+		$this->_private_key = $this->ci->config->item('private_key');		
+		log_message('debug', "LiqPay Class Initialized");
+	}
+	 
     /**
      * Call API
      *
