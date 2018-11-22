@@ -42,5 +42,7 @@
 
 <p><?php echo form_submit('', 'Обновить'); ?></p>
 </form>
-<a href="<?php echo base_url(); ?>orders/create"><button>Оформить заказ</button></a><a href="items/zorder"> <button>Удалить все</button></a>
+<a href="<?php echo base_url(); ?>orders/create"><button>Оформить заказ</button></a>
+<a href="<?php echo base_url(); ?>items/zorder"><button>Удалить все</button></a>
+<a href="<?php echo base_url(); ?>"><button>Продолжить покупки</button></a><br>
 </article>
