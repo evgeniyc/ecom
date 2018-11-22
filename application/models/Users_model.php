@@ -6,6 +6,13 @@ class Users_model extends CI_Model {
 			$this->load->database();
 	}
 	
+	public function get_users()
+	{
+		$this->db->select('id, login, email, status');
+		$query = $this->db->get('users');
+		return $query->result_array();
+	}
+	
 	public function create()
 	{	
 		$post = $this->input->post();

@@ -7,9 +7,20 @@ class Users extends CI_Controller {
 			$this->load->model('users_model');
 			$this->load->helper('form');
 			$this->load->helper('url');
+			$this->load->library('table');
 	}
 	 
-	 public function create()
+		public function index()
+		{
+			$data['users'] = $this->users_model->get_users();
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('users/index', $data);
+			$this->load->view('templates/footer');
+			
+		}
+		
+		public function create()
         {
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
