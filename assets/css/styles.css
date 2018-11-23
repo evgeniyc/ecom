@@ -59,6 +59,7 @@ nav .active
 {
 	color: red;
 }
+
 #breadcrumbs
 {
 	background: #E9ECEF;
@@ -77,6 +78,10 @@ aside
 	background: #BFBF30;
 	padding: 15px;
 	
+}
+#sidebar_img img
+{
+	width: 100%;
 }
 article
 {

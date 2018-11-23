@@ -57,14 +57,12 @@ class Users extends CI_Controller {
 		public function login()
 		{
 			$this->load->library('form_validation');
-			$this->load->helper('url');
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			
 			$this->form_validation->set_rules('login', 'Логин',	'required');
 			$this->form_validation->set_rules('pass', 'Пароль', 'required');
 			$this->form_validation->set_rules('pass', 'Пароль', 'callback_auth');
 			$this->form_validation->set_message('auth', 'Неверный пароль');
-			//if (!($this->form_validation->run()) || !($this->users_model->auth()))
 			if (!($this->form_validation->run()))
 			{
 				$this->load->view('templates/header');

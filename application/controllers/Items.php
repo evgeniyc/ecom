@@ -256,42 +256,57 @@ class Items extends CI_Controller {
 	//Добавление позиции в корзину (Ajax)
 	public function resp()
 	{
-		$this->load->library('cart');
-		$data = array(
-        'id'      => $this->input->post('id'),
-        'qty'     => $this->input->post('qty'),
-        'price'   => $this->input->post('price'),
-        'name'    => $this->input->post('name'),
-		);
-		$this->cart->insert($data);
-		echo 'Позиция успешно добавлена в корзину.';
+		if($this->session->logged_in):
+			$data = array(
+			'id'      => $this->input->post('id'),
+			'qty'     => $this->input->post('qty'),
+			'price'   => $this->input->post('price'),
+			'name'    => $this->input->post('name'),
+			);
+			$this->cart->insert($data);
+			echo 'Позиция успешно добавлена в корзину.';
+		else:
+			echo 'Выполните вход или зарегистрируйтесь.';
+		endif;
 	}
 	
 	//Содержание корзины
 	public function cart()
 	{
-		$this->load->view('templates/header');
-		$this->load->view('sidebars/sidebar1');
-		$this->load->view('items/cart');
-		$this->load->view('templates/footer');
+		if($this->session->logged_in):
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('items/cart');
+			$this->load->view('templates/footer');
+		else: 
+			redirect('users/login');
+		endif;
 	}
 	
 	//Обновление содержания корзины по данным формы
 	public function cartUpdate()
 	{
-		$data = $this->input->post();
-		$this->cart->update($data);
-		$this->load->view('templates/header');
-		$this->load->view('sidebars/sidebar1');
-		$this->load->view('items/cart');
-		$this->load->view('templates/footer');
+		if($this->session->logged_in):
+			$data = $this->input->post();
+			$this->cart->update($data);
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('items/cart');
+			$this->load->view('templates/footer');
+		else:
+			redirect('users/login');
+		endif;
 	}
 	
 	//Удаление всех элементов корзины
 	public function zorder()
 	{
-		$this->cart->destroy();
-		redirect('cats/index');
+		if($this->session->logged_in):
+			$this->cart->destroy();
+			redirect('cats/index');
+		else:
+			redirect('users/login');
+		endif;
 	}
 	
 }

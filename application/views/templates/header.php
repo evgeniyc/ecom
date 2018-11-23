@@ -37,14 +37,20 @@
 			</div>
 		</header>
 		<nav class="row nav justify-content-center">
-			<a class="nav-link" href="<?php echo base_url(); ?>">Главная</a>
-			<a class="nav-link" href="#">О нас</a>
-			<a class="nav-link" href="#">Контакты</a>
+			<a class="nav-link" href="<?php echo base_url(); ?>"><i class="fas fa-home"></i> Главная</a>
+			<a class="nav-link" href="<?php echo base_url().'pages/view/about';?>"><i class="fas fa-book"></i> О нас</a>
+			<a class="nav-link" href="<?php echo base_url().'pages/view/contacts';?>"><i class="fas fa-address-book"></i> Контакты</a>
 			<?php 
-				if($this->session->logged_in == FALSE)
-					echo '<a class="nav-link" href="'.base_url().'users/login">Вход</a>';
-				else
-					echo '<a class="nav-link" href="'.base_url().'users/logout">Выход</a>'; ?>
+				if($this->session->logged_in == FALSE):
+					echo '<a class="nav-link" href="'.base_url().'users/login"><i class="fas fa-sign-in-alt"></i> Вход</a>';
+					echo '<a class="nav-link" href="'.base_url().'users/create"><i class="fas fa-registered"></i> Регистрация</a>';
+				else:
+					echo '<a class="nav-link" href="'.base_url().'orders/view"><i class="fas fa-id-card"></i> Мой кабинет</a>';
+					echo '<a class="nav-link" href="'.base_url().'users/logout"><i class="fas fa-sign-out-alt"></i> Выход</a>';
+					if($this->session->status == 'admin'):
+						echo '<a class="nav-link" href="'.base_url().'admin"><i class="fas fa-toolbox"></i> Админ</a>';
+					endif;
+				endif; ?>
 		</nav>
 		<div id="breadcrumbs" class="row"><?php echo $this->breadcrumbs->show(); ?></div> 
 		<main class="row">
