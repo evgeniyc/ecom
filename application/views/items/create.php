@@ -20,6 +20,7 @@
         <br><label for="descr">Введите описание: </label><br>
 		<?php	$data = array(
 						'name' => 'descr',
+						'value' => set_value('descr'),
 						);
 				echo form_textarea($data); ?><br>
 

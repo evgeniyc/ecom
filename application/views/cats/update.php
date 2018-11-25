@@ -7,7 +7,7 @@
 		<?php 	echo form_open('cats/update');
 				foreach($cats as $cat)
 					$options[$cat->id] = $cat->brand;
-				echo form_label('Выберите модель: ', 'cats');
+				echo form_label('Выберите категорию: ', 'cats');
 				echo form_dropdown('cats', $options);
 				echo '<br>';
 				if(!empty($category)):

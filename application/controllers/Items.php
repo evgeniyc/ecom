@@ -58,7 +58,7 @@ class Items extends CI_Controller {
 	{
 		
 		$this->breadcrumbs->push('Категории', '/cats');
-		$this->breadcrumbs->push('Добавить изображение', '/cats/upload');
+		$this->breadcrumbs->push('Создать модель', '/items/create');
 		$this->breadcrumbs->unshift('Главная', '/');
 			
 		$this->load->helper('form');

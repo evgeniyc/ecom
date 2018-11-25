@@ -48,6 +48,12 @@ class Cats_model extends CI_Model {
 	public function delete()
 	{
 		$id = $this->input->post('cats');
-		$this->db->delete('cats', array('id' => $id));
+		$query = $this->db->get_where('cats', array('id' => $id));
+		$cat = $query->row();
+		if(isset($cat)):
+			$file_name = $cat->img;
+			unlink(FCPATH.'assets\img\logo\\'.$file_name);
+			$this->db->delete('cats', array('id' => $id));
+		endif;
 	}
 }

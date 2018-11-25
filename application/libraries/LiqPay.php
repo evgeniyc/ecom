@@ -47,7 +47,8 @@ class LiqPay
     private $_public_key;
     private $_private_key;
     private $_server_response_code = null;
-
+	
+	protected $ci;
     /**
      * Constructor.
      *

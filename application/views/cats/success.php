@@ -3,4 +3,5 @@
 	<p><?php echo anchor('cats/create', 'Создать категорию'); ?></p>
 	<p><?php echo anchor('cats/update', 'Редактировать категорию'); ?></p>
 	<p><?php echo anchor('cats/upload', 'Редактировать изображение'); ?></p>
+	<?php if(isset($resp));?>
 </article>

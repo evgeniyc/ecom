@@ -5,7 +5,6 @@ class Cats extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('cats_model');
-		$this->load->helper('url_helper');
 		$this->load->helper('form');
 	}
 
@@ -61,7 +60,6 @@ class Cats extends CI_Controller {
 		$this->form_validation->set_rules('brand', 'Наименование', 'required');
 		$data['cats'] = $this->cats_model->get_cats();
 		$data['category'] = $this->cats_model->get_cat();
-		$data['error'] = '';
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->load->view('templates/header');
@@ -116,10 +114,28 @@ class Cats extends CI_Controller {
 		
 	public function delete()
 	{
-		$this->cats_model->delete();
-		$this->load->view('templates/header');
-		$this->load->view('sidebars/sidebar1');
-		$this->load->view('cats/success');
-		$this->load->view('templates/footer');
-	}
+		// добавление breadcrumbs
+		$this->breadcrumbs->push('Редактирование категории', '/cats/create');
+		// unshift crumb
+		$this->breadcrumbs->unshift('Главная', '/cats');
+		
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('cats', 'Категория', 'required');
+		$data['cats'] = $this->cats_model->get_cats();
+		if ($this->form_validation->run() === FALSE)
+		{
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('cats/delete', $data);
+			$this->load->view('templates/footer');
+		}
+		else
+		{
+			$this->cats_model->delete();
+			$this->load->view('templates/header');
+			$this->load->view('sidebars/sidebar1');
+			$this->load->view('cats/success', $data);
+			$this->load->view('templates/footer');
+		}
+	}		
 }

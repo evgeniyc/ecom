@@ -10,24 +10,26 @@
 		</fieldset>
 		<fieldset>
 			<legend>Управление категориями</legend>
-			<?php	echo anchor('cats/index', 'Все категории').'&nbsp';
-					echo anchor('cats/create', 'Добавить категорию').'&nbsp';
-					echo anchor('cats/edit', 'Редактировать категорию').'&nbsp';
+			<?php	echo anchor('cats/create', 'Добавить категорию').'&nbsp';
+					echo anchor('cats/upload', 'Добавить изображение').'&nbsp';
+					echo anchor('cats/update', 'Редактировать категорию').'&nbsp';
 					echo anchor('cats/delete', 'Удалить категорию'); ?>
 		</fieldset>
 		<fieldset>
-			<legend>Управление позициями</legend>
-			<?php	echo anchor('items/index', 'Все позиции').'&nbsp';
-					echo anchor('items/create', 'Добавить позицию').'&nbsp';
-					echo anchor('items/update', 'Редактировать позицию').'&nbsp';
-					echo anchor('items/delete', 'Удалить позицию'); ?>
+			<legend>Управление моделями</legend>
+			<?php	echo anchor('items/create', 'Добавить модель').'&nbsp';
+					echo anchor('items/update', 'Редактировать модель').'&nbsp';
+					echo anchor('items/editimg', 'Редактировать изображение').'&nbsp';
+					echo anchor('items/charact', 'Добавить характеристики').'&nbsp';
+					echo anchor('items/updatecharact', 'Добавить характеристики').'&nbsp';
+					echo anchor('items/delete', 'Удалить элемент'); ?>
 		</fieldset>
 		<fieldset>
 			<legend>Управление заказами</legend>
 			<?php	echo anchor('orders/index', 'Все заказы').'&nbsp';
 					echo anchor('orders/index', 'Заказы по пользователю').'&nbsp';
 					echo anchor('orders/index', 'Заказы по статусу').'&nbsp';
-					echo anchor('users/edit', 'Редактировать заказ').'&nbsp';
+					echo anchor('users/edit', 	'Редактировать заказ').'&nbsp';
 					echo anchor('users/delete', 'Удалить заказ'); ?>
 		</fieldset>
 	</section>
