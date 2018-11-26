@@ -1,39 +1,29 @@
 <article class="col-sm-9">
-	<h2>Создание категории</h2>
-	<fieldset>
-		<legend>Наименование бренда</legend>
+	<h2>Добавление изображений модели</h2>
+<fieldset>
+		<legend>Создание модели</legend>
 		<div class="error"><?php echo validation_errors(); ?></div>
-
-		<?php echo form_open('cats/create'); ?>
-
-			<label for="brand">Наименование бренда</label>
-			<input type="text" name="brand" size="12"><br>
-			<input type="submit" name="submit" value="Создать">
-
-		</form>
-	</fieldset><br>
-	<fieldset>
-		<legend>Загрузка файла изображения</legend>
-		<div class="error"><?php echo $error;?></div>
-
-		<?php echo form_open_multipart('cats/upload');?>
+		
+		<?php echo form_open_multipart('cats/create');
 			
-		<?php foreach($cats as $cat):
+		echo form_label('Введите наименование категории:&nbsp;','brand');
+		$data = array(
+			'name' => 'brand',
+			'size' => 12,
+		);
+		echo form_input($data);
+		echo br();
 		
-		$options[$cat->id] = $cat->brand;
-        
-		endforeach;
+		echo '<div class="error">'.$error.'</div>';
+		echo form_label('Выберите изображение:&nbsp;','userfile');
+		$data = array(
+			'name' => 'userfile',
+			'size' => 12,
+		);
+		echo form_upload($data);
+		echo br();
 		
-		if (isset($options)):
-			echo '<label for="cats">Выберите категорию</label> ';
-			echo form_dropdown('cats', $options);
-		endif;?><br>
-
-			<label for="userfile">Добавить изображение</label>
-			<input type="file" name="userfile" size="12" />
-			<br />
-			<input type="submit" value="Загрузить" />
+		echo form_submit('', 'Сохранить');?>
 		</form>
 	</fieldset>
 </article>
-   

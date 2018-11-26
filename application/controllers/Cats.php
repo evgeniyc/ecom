@@ -22,22 +22,31 @@ class Cats extends CI_Controller {
 	//Создание новой категории
 	public function create()
 	{
-		// добавление breadcrumbs
-		$this->breadcrumbs->push('Создние категории', '/cats/create');
-		// unshift crumb
-		$this->breadcrumbs->unshift('Главная', '/cats');
 		
+		$this->breadcrumbs->push('Создать категорию', '/cats/create');
+		$this->breadcrumbs->unshift('Главная', '/');
+			
+		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('brand', 'Наименование', 'required');
-		$data['cats'] = $this->cats_model->get_cats();
+		$this->form_validation->set_rules('brand', 'Категория', 'required|is_unique[cats.brand]');
+		
+		$config['upload_path']          = './assets/img/logo';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 200;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+		$config['overwrite']			= TRUE;
+
+		$this->load->library('upload', $config);
 		$data['error'] = '';
-		if ($this->form_validation->run() === FALSE)
+		if ( ! $this->upload->do_upload('userfile') || $this->form_validation->run() === FALSE)
 		{
+			$data['error'] = $this->upload->display_errors();
+
 			$this->load->view('templates/header');
 			$this->load->view('sidebars/sidebar1');
 			$this->load->view('cats/create', $data);
 			$this->load->view('templates/footer');
-
 		}
 		else
 		{
@@ -93,6 +102,7 @@ class Cats extends CI_Controller {
 
 			$this->load->library('upload', $config);
 			$data['cats'] = $this->cats_model->get_cats();
+			$data['error'] = '';
 			if ( ! $this->upload->do_upload('userfile'))
 			{
 				$data['error'] = $this->upload->display_errors();

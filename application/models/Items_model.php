@@ -33,7 +33,7 @@ class Items_model extends CI_Model {
 		$data = array(
 			'cat' => $this->input->post('cats'),
 			'model' => $this->input->post('model'),
-			'thumb' => $img = $this->upload->data('file_name'),
+			'thumb' => $this->upload->data('file_name'),
 			'descr' => $this->input->post('descr'),
 			'price' => $this->input->post('price'),
 		);
