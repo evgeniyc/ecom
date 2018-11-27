@@ -23,9 +23,9 @@ class Cats_model extends CI_Model {
 	{
 		$data = array(
 			'brand' => $this->input->post('brand'),
+			'img' => $this->upload->data('file_name'),
 		);
-
-		return $this->db->insert('cats', $data);
+		$this->db->insert('cats', $data);
 	}
 	
 	public function set_cat_img()

@@ -47,7 +47,7 @@
 				else:
 					echo '<a class="nav-link" href="'.base_url().'orders/view"><i class="fas fa-id-card"></i> Мой кабинет</a>';
 					echo '<a class="nav-link" href="'.base_url().'users/logout"><i class="fas fa-sign-out-alt"></i> Выход</a>';
-					if($this->session->status == 'admin'):
+					if($this->session->status == 'admin' || $this->session->status == 'editor'):
 						echo '<a class="nav-link" href="'.base_url().'admin"><i class="fas fa-toolbox"></i> Админ</a>';
 					endif;
 				endif; ?>

@@ -19,7 +19,7 @@
 			);
 			echo form_upload($data);
 			echo '<br>';
-			echo form_submit('submit', 'Загрузить');?>
+			echo form_submit('submit', 'Сохранить');?>
 			
 		</form>
 	</fieldset>

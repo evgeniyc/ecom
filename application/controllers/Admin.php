@@ -11,10 +11,13 @@ class Admin extends CI_Controller {
 	{
 		if($this->session->status == 'admin'):
 			$this->load->view('templates/header');
-			$this->load->view('sidebars/sidebar1');
 			$this->load->view('admin/index');
 			$this->load->view('templates/footer');
-		else:
+		elseif($this->session->status == 'editor'):
+			$this->load->view('templates/header');
+			$this->load->view('admin/edit');
+			$this->load->view('templates/footer');
+		else:	
 			show_404();
 		endif;
 	}

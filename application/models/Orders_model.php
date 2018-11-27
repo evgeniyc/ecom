@@ -6,6 +6,13 @@ class Orders_model extends CI_Model {
 			$this->load->database();
 	}
 	
+	public function get_orders()
+	{	
+		$this->db->select('id, item_id, qty, price, date, user, status');
+		$query = $this->db->get('orders');
+		return $query->result_array();
+	}
+	
 	public function get_orders_status()
 	{	
 		$this->db->select('id, item_id, qty, price, date, user, status');
