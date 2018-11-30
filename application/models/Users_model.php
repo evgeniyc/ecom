@@ -13,6 +13,13 @@ class Users_model extends CI_Model {
 		return $query->result_array();
 	}
 	
+	public function get_user()
+	{
+		$id = $this->input->post('id');
+		$request = $this->db->get_where('users', array('id' => $id));
+		return $request->row();
+	}
+	
 	public function create()
 	{	
 		$post = $this->input->post();
@@ -47,6 +54,11 @@ class Users_model extends CI_Model {
 		else:
 			return $result;
 		endif;
+	}
+	
+	public function edit_staus()
+	{
+		$this->db->update('users', array('status' => $this->input->post('status')),'id='.$id);
 	}
 	
 	public function delete()
