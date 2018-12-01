@@ -8,6 +8,8 @@ class Users extends CI_Controller {
 			$this->load->helper('form');
 			$this->load->helper('url');
 			$this->load->library('table');
+			$this->config->set_item('language', $this->input->cookie('lang'));
+			
 	}
 	 
 		public function index()

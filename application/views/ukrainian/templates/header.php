@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>assets\css\styles.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 	<link rel="shortcut icon" href="<?php echo base_url();?>assets/img/icon.jpg" type="image/jpg">
-    <title>Магазин мобильных телефонов</title>
+    <title>Магазин мобільних телефонів</title>
   </head>
   <body>
     <div id="page" class="container">
@@ -29,11 +29,11 @@
 				
 			</div>
 			<div id="contacts" class="col-12 col-md-3">
-				<i class="fas fa-home"></i>Здесь контактные данные<br>
+				<i class="fas fa-home"></i>Тут контактні дані<br>
 				<i class="fas fa-phone"></i>(095)322-23-23<br>
 				<a id="cart_link" href="/ci/items/cart"><i class="fas fa-shopping-cart">&nbsp;</i><?php echo $this->cart->total_items(); ?></a>
 				<?php if($this->session->logged_in)
-						echo 'Привет '.$this->session->login;?>
+						echo 'Привіт '.$this->session->login;?>
 					
 				<div id="langs">	
 					<?php 	echo anchor('langs/setlang/1','UA', array('class' => 'langs'));
@@ -43,18 +43,18 @@
 			</div>
 		</header>
 		<nav class="row nav justify-content-center">
-			<a class="nav-link" href="<?php echo base_url(); ?>"><i class="fas fa-home"></i> Главная</a>
-			<a class="nav-link" href="<?php echo base_url().'pages/view/about';?>"><i class="fas fa-book"></i> О нас</a>
-			<a class="nav-link" href="<?php echo base_url().'pages/view/contacts';?>"><i class="fas fa-address-book"></i> Контакты</a>
+			<a class="nav-link" href="<?php echo base_url(); ?>"><i class="fas fa-home"></i> Головна</a>
+			<a class="nav-link" href="<?php echo base_url().'pages/view/about';?>"><i class="fas fa-book"></i> Про нас</a>
+			<a class="nav-link" href="<?php echo base_url().'pages/view/contacts';?>"><i class="fas fa-address-book"></i> Контакти</a>
 			<?php 
 				if($this->session->logged_in == FALSE):
-					echo '<a class="nav-link" href="'.base_url().'users/login"><i class="fas fa-sign-in-alt"></i> Вход</a>';
-					echo '<a class="nav-link" href="'.base_url().'users/create"><i class="fas fa-registered"></i> Регистрация</a>';
+					echo '<a class="nav-link" href="'.base_url().'users/login"><i class="fas fa-sign-in-alt"></i> Вхід</a>';
+					echo '<a class="nav-link" href="'.base_url().'users/create"><i class="fas fa-registered"></i> Реєстрація</a>';
 				else:
-					echo '<a class="nav-link" href="'.base_url().'orders/view"><i class="fas fa-id-card"></i> Мой кабинет</a>';
-					echo '<a class="nav-link" href="'.base_url().'users/logout"><i class="fas fa-sign-out-alt"></i> Выход</a>';
+					echo '<a class="nav-link" href="'.base_url().'orders/view"><i class="fas fa-id-card"></i> Мій кабінет</a>';
+					echo '<a class="nav-link" href="'.base_url().'users/logout"><i class="fas fa-sign-out-alt"></i> Вихід</a>';
 					if($this->session->status == 'admin' || $this->session->status == 'editor'):
-						echo '<a class="nav-link" href="'.base_url().'admin"><i class="fas fa-toolbox"></i> Админ</a>';
+						echo '<a class="nav-link" href="'.base_url().'admin"><i class="fas fa-toolbox"></i> Адмін</a>';
 					endif;
 				endif; ?>
 			

@@ -59,6 +59,14 @@ nav .active
 {
 	color: red;
 }
+#langs
+{
+	float: right;
+	background: #bD76e5;
+	padding: 0 5px;
+	margin-bottom: -15px; 
+	
+}
 
 #breadcrumbs
 {

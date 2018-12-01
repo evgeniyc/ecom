@@ -12,11 +12,13 @@ class Cats extends CI_Controller {
 	public function index()
 	{
 		$data['cats'] = $this->cats_model->get_cats();
-		
-		$this->load->view('templates/header');
+		$lang = $this->input->cookie('lang');
+		if($lang)
+			$lang .= '/';
+		$this->load->view($lang.'templates/header');
 		$this->load->view('sidebars/sidebar1');
 		$this->load->view('cats/index', $data);
-		$this->load->view('templates/footer');
+		$this->load->view($lang.'templates/footer');
 	}
 
 	//Создание новой категории

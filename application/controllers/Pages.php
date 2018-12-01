@@ -8,10 +8,12 @@ class Pages extends CI_Controller {
 				// Whoops, we don't have a page for that!
 				show_404();
 		}
-
-		$this->load->view('templates/header');
+		$lang = $this->input->cookie('lang');
+		if($lang)
+			$lang .= '/';
+		$this->load->view($lang.'templates/header');
 		$this->load->view('sidebars/sidebar1');
 		$this->load->view('pages/'.$page);
-		$this->load->view('templates/footer');
+		$this->load->view($lang.'templates/footer');
 	}
 }

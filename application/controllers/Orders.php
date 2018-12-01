@@ -6,6 +6,7 @@ class Orders extends CI_Controller {
 			parent::__construct();
 			$this->load->model('orders_model');
 			$this->load->helper('url');
+			$this->config->set_item('language', $this->input->cookie('lang'));
 			
 	}
 
