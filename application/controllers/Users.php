@@ -56,6 +56,31 @@ class Users extends CI_Controller {
 			}
         }
 		
+		public function edit()
+        {
+			if($this->session->status == 'admin'):
+				$this->load->library('form_validation');
+				$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+				$this->form_validation->set_rules('id', 'Идентификатор', 'required|max_length[5]');
+				$this->form_validation->set_rules('status', 'Статус', 'required|max_length[5]');
+								
+				if ($this->form_validation->run() == FALSE)
+				{
+					$this->load->view('templates/header');
+					$this->load->view('sidebars/sidebar1');
+					$this->load->view('users/edit');
+					$this->load->view('templates/footer');
+				}
+				else
+				{
+					$this->users_model->edit_status();
+					$this->load->view('templates/header');
+					$this->load->view('sidebars/sidebar1');
+					$this->load->view('users/success');
+					$this->load->view('templates/footer');
+				}
+        }
+		
 		public function login()
 		{
 			$this->load->library('form_validation');
