@@ -16,7 +16,7 @@ class Cats extends CI_Controller {
 		if($lang)
 			$lang .= '/';
 		$this->load->view($lang.'templates/header');
-		$this->load->view('sidebars/sidebar1');
+		$this->load->view($lang.'sidebars/sidebar1');
 		$this->load->view('cats/index', $data);
 		$this->load->view($lang.'templates/footer');
 	}

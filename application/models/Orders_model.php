@@ -6,27 +6,22 @@ class Orders_model extends CI_Model {
 			$this->load->database();
 	}
 	
+//Получение заказов для админ (ид, статус, все подряд)
 	public function get_orders()
 	{	
+		if(null != $this->input->post('status')):
+			$status = $this->input->post('status');
+			$this->db->where('status', $status);
+		endif;
+		if(null != $this->input->post('id')):
+			$id = $this->input->post('id');
+			$this->db->where('user', $id);
+		endif;
 		$this->db->select('id, item_id, qty, price, date, user, status');
 		$query = $this->db->get('orders');
 		return $query->result_array();
 	}
-	
-	public function get_orders_status()
-	{	
-		$this->db->select('id, item_id, qty, price, date, user, status');
-		$query = $this->db->get_where('orders', array('status'=>'new'));
-		return $query->result_array();
-	}
-	
-	public function get_orders_user()
-	{	
-		$this->db->select('id, item_id, qty, price, date, user, status');
-		$query = $this->db->get_where('orders', array('status'=>'new'));
-		return $query->result_array();
-	}
-	
+//Получение заказов для пользователя	
 	public function get_order()
 	{	
 		if (!empty($this->session->id))
@@ -39,7 +34,7 @@ class Orders_model extends CI_Model {
 		}
 		return null;
 	}
-	
+//Получение заказа по его ид	
 	public function get_order_amount()
 	{
 		$id = $this->input->post('order_id');
@@ -48,7 +43,7 @@ class Orders_model extends CI_Model {
 		return $order;
 	}
 		
-	
+//Создание нового заказа	
 	public function set_order()
 	{
 		foreach ($this->cart->contents() as $item):
@@ -62,7 +57,7 @@ class Orders_model extends CI_Model {
 		endforeach;
 		$this->cart->destroy();
 	}
-	
+//Изменение статуса заказа	
 	public function change_status()
 	{
 		$id = $this->input->post('order_id');

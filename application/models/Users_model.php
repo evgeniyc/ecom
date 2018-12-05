@@ -56,9 +56,9 @@ class Users_model extends CI_Model {
 		endif;
 	}
 	
-	public function edit_staus()
+	public function edit_status()
 	{
-		$this->db->update('users', array('status' => $this->input->post('status')),'id='.$id);
+		$this->db->update('users', array('status' => $this->input->post('status')),'id='.$this->input->post('id'));
 	}
 	
 	public function delete()

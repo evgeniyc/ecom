@@ -61,8 +61,9 @@ class Users extends CI_Controller {
 			if($this->session->status == 'admin'):
 				$this->load->library('form_validation');
 				$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-				$this->form_validation->set_rules('id', 'Идентификатор', 'required|max_length[5]');
-				$this->form_validation->set_rules('status', 'Статус', 'required|max_length[5]');
+				$this->form_validation->set_rules('id', 'Идентификатор', 'required|max_length[5]|not_is_unique[users.id]',
+					array('not_is_unique' => 'Такого идентификатора не существует.'));
+				$this->form_validation->set_rules('status', 'Статус', 'required|max_length[6]|in_list[user,editor,admin]');
 								
 				if ($this->form_validation->run() == FALSE)
 				{
@@ -79,6 +80,9 @@ class Users extends CI_Controller {
 					$this->load->view('users/success');
 					$this->load->view('templates/footer');
 				}
+			else:
+				show_404();
+			endif;
         }
 		
 		public function login()

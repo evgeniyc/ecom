@@ -27,8 +27,8 @@
 		<fieldset>
 			<legend>Управление заказами</legend>
 			<?php	echo anchor('orders/index', 'Все заказы').'&nbsp';
-					echo anchor('orders/user', 'Заказы по пользователю').'&nbsp';
-					echo anchor('orders/status', 'Заказы по статусу').'&nbsp';
+					echo anchor('orders/orders_user', 'Заказы по пользователю').'&nbsp';
+					echo anchor('orders/orders_status', 'Заказы по статусу').'&nbsp';
 					echo anchor('users/edit', 	'Редактировать заказ').'&nbsp';
 					echo anchor('users/delete', 'Удалить заказ'); ?>
 		</fieldset>

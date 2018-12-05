@@ -9,7 +9,7 @@ class Orders extends CI_Controller {
 			$this->config->set_item('language', $this->input->cookie('lang'));
 			
 	}
-
+//Вывод заказов (всех, по статусу, по пользователю) для админ
 	public function index()
 	{
 		if($this->session->logged_in):
@@ -23,7 +23,7 @@ class Orders extends CI_Controller {
 			redirect('users/login');
 		endif;
 	}
-
+//Вывод заказов конкретного пользователя
 	public function view()
 	{
 		if($this->session->logged_in):
@@ -39,7 +39,7 @@ class Orders extends CI_Controller {
 			redirect('users/login');
 		endif;
 	}
-	
+//Создание заказа	
 	public function create()
 	{
 		if($this->session->logged_in && !empty($this->cart->total_items())):
@@ -52,7 +52,8 @@ class Orders extends CI_Controller {
 			redirect(base_url());
 		endif;
 	}
-	
+//Подготовка данных для оплаты через liqpay. Использует ajax. Возвращает кнопку оплаты.
+//Для формирования данных использует официальную библиотеку liqpay.
 	public function prepare()
 	{
 		if($this->input->is_ajax_request() && $this->session->logged_in && !empty($this->input->post('order_id'))):
