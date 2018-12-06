@@ -23,7 +23,7 @@
 					echo form_fieldset_close();?>
 				</form>
 	</div>
-	<div id="pay_place" class="row"></div>
+	<div id="pay_place"></div>
 </article>
 <script>
 	function send()
