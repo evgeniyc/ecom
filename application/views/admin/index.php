@@ -21,8 +21,8 @@
 					echo anchor('items/update', 'Редактировать модель').'&nbsp';
 					echo anchor('items/editimg', 'Редактировать изображение').'&nbsp';
 					echo anchor('items/charact', 'Добавить характеристики').'&nbsp';
-					echo anchor('items/updatecharact', 'Добавить характеристики').'&nbsp';
-					echo anchor('items/delete', 'Удалить элемент'); ?>
+					echo anchor('items/updatecharact', 'Редактировать характеристики').'&nbsp';
+					echo anchor('items/delete', 'Удалить модель'); ?>
 		</fieldset>
 		<fieldset>
 			<legend>Управление заказами</legend>

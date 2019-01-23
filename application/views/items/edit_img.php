@@ -8,21 +8,19 @@
 			
 		<?php 	foreach($cats as $cat)
 					$options[$cat->id] = $cat->brand;
-        
-				if (isset($options)):
-					echo '<label for="cats">Выберите категорию: </label> ';
-					echo form_dropdown('cats', $options);
-				endif;?><br>
+				echo '<label for="cats">Выберите категорию: </label> ';
+				echo form_dropdown('cats', $options);?>
+				<br>
 		<?php 	if (!empty($models)):
 					foreach($models as $model)
 						$opt[$model->id] = $model->model;
 					echo '<label for="model">Выберите модель: </label> ';
-					echo form_dropdown('model', $opt);
-				endif;?>
-		<div class="error"><?php echo $error;?></div>
-		<label for="userfile">Выберите новое изображение: </label>
-		<input type="file" name="userfile" size="12" /><br />
-		
+					echo form_dropdown('model', $opt);?>
+				
+					<div class="error"><?php echo $error;?></div>
+					<label for="userfile">Выберите новое изображение: </label>
+					<input type="file" name="userfile" size="12" /><br />
+		<?php 	endif;?>
 		<input type="submit" value="<?php echo empty($model) ? 'Выбрать модель' : 'Сохранить изменения';?>" />
 		</form>
 	</fieldset>
