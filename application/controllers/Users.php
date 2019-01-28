@@ -11,17 +11,20 @@ class Users extends CI_Controller {
 			$this->config->set_item('language', $this->input->cookie('lang'));
 			
 	}
-	 
+//Вывод всех пользователей (только для админа)	 
 		public function index()
 		{
-			$data['users'] = $this->users_model->get_users();
-			$this->load->view('templates/header');
-			$this->load->view('sidebars/sidebar1');
-			$this->load->view('users/index', $data);
-			$this->load->view('templates/footer');
-			
+			if($this->session->status == 'admin'):
+				$data['users'] = $this->users_model->get_users();
+				$this->load->view('templates/header');
+				$this->load->view('sidebars/sidebar1');
+				$this->load->view('users/index', $data);
+				$this->load->view('templates/footer');
+			else: 
+				show_404();
+			endif;
 		}
-		
+//Регистрация пользователя		
 		public function create()
         {
 			$this->load->library('form_validation');
@@ -55,7 +58,7 @@ class Users extends CI_Controller {
 				$this->load->view('templates/footer');
 			}
         }
-		
+//Редактирование пользователя (только для админа)		
 		public function edit()
         {
 			if($this->session->status == 'admin'):
@@ -84,7 +87,7 @@ class Users extends CI_Controller {
 				show_404();
 			endif;
         }
-		
+//Форма входа в профиль		
 		public function login()
 		{
 			$this->load->library('form_validation');
@@ -107,18 +110,18 @@ class Users extends CI_Controller {
 			}
 			
 		}
-		
+//Функция аутентификации пользователя		
 		public function auth()
 		{
 			return $result = $this->users_model->auth();
 		}
-			
+//Функция выхода из профиля			
 		public function logout()
 		{
 			$this->session->sess_destroy();
 			redirect(base_url());
 		}
-		
+//Удаление пользователя		
 		public function delete()
 		{
 			if($this->session->status != 'admin')

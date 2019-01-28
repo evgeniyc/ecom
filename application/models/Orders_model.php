@@ -17,7 +17,8 @@ class Orders_model extends CI_Model {
 			$id = $this->input->post('id');
 			$this->db->where('user', $id);
 		endif;
-		$this->db->select('id, item_id, qty, price, date, user, status');
+		$this->db->select('orders.id, model, qty, orders.price, date, user, status');
+		$this->db->join('items', 'items.id = orders.item_id');
 		$query = $this->db->get('orders');
 		return $query->result_array();
 	}
