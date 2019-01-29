@@ -17,12 +17,21 @@
 		</fieldset>
 		<fieldset>
 			<legend>Управление моделями</legend>
+<<<<<<< HEAD
 			<?php	echo anchor('items/create', '<button>Добавить</button>').'&nbsp';
 					echo anchor('items/update', '<button>Редактировать</button>').'&nbsp';
 					echo anchor('items/editimg', '<button>Изображение</button>').'&nbsp';
 					echo anchor('items/charact', '<button>Характеристики</button>').'&nbsp';
 					echo anchor('items/updatecharact', '<button>Редактировать характеристики</button>').'&nbsp';
 					echo anchor('items/delete', '<button>Удалить</button>'); ?>
+=======
+			<?php	echo anchor('items/create', 'Добавить модель').'&nbsp';
+					echo anchor('items/update', 'Редактировать модель').'&nbsp';
+					echo anchor('items/editimg', 'Редактировать изображение').'&nbsp';
+					echo anchor('items/charact', 'Добавить характеристики').'&nbsp';
+					echo anchor('items/updatecharact', 'Редактировать характеристики').'&nbsp';
+					echo anchor('items/delete', 'Удалить модель'); ?>
+>>>>>>> 1cc5254f9b3b65006eb7e1d77cea78d66c87972f
 		</fieldset>
 		<fieldset>
 			<legend>Управление заказами</legend>

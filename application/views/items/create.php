@@ -19,6 +19,7 @@
 		$data = array(
 			'name' => 'model',
 			'size' => 12,
+			'value' => set_value('model'),
 		);
 		echo form_input($data);
 		echo br();
@@ -42,7 +43,8 @@
 		echo form_label('Введите цену:&nbsp;', 'price');
 		$data = array(
 			'name' => 'price',
-			'size' => '12',
+			'size' => 6,
+			'value' => set_value('price'),
 		);
 		echo form_input($data).'<span> грн.</span>';
 		echo br();

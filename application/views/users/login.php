@@ -5,25 +5,22 @@
 		
 		<?php	echo validation_errors();
 				echo form_open('users/login'); 
-				
-					echo form_label('Логин:&nbsp;', 'login');
-					$data = array(
+					$data1 = array(
 						'name' => 'login',
 						'maxlength' => '16',
 						'size' => '16',
 						'value' => set_value('login'),
 					);
-					echo form_input($data).'<br>';
-					
-					echo form_label('Пароль:&nbsp;', 'pass');
-					$data = array(
+					$data2 = array(
 						'name' => 'pass',
 						'maxlength' => '16',
 						'size' => '16',
 					);
-					echo form_password($data).'<br>';
-					
-					echo form_submit('', 'Войти');?>
+					$this->load->library('table');
+						$this->table->add_row(form_label('Логин:&nbsp;', 'login'), form_input($data1));
+						$this->table->add_row(form_label('Пароль:&nbsp;', 'pass'), form_password($data2));
+						$this->table->add_row(form_submit('', 'Войти'));
+					echo $this->table->generate();?>
 				</form>
 	</fieldset>
 </article>

@@ -46,7 +46,7 @@ class Items_model extends CI_Model {
 	{
 		$img = $this->upload->data('file_name');
 		$id = $this->input->post('model');
-		return $this->db->update('items', array('img' => $img), 'id ='.$id);
+		return $this->db->update('items', array('thumb' => $img), 'id ='.$id);
 	}
 	
 	//Получение позиций одной категории по данным формы
@@ -76,7 +76,7 @@ class Items_model extends CI_Model {
 	public function set_item_img($img)
 	{
 		$id = $this->input->post('models');
-		$this->db->update('items', array('img' => $img), 'id ='.$id);
+		$this->db->update('items', array('thumb' => $img), 'id ='.$id);
 	}
 	
 	//Добавление характеристик позиции

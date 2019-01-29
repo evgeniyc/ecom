@@ -10,8 +10,8 @@
 ||
 */
 
-$config['public_key'] = 'i54475387141';
-$config['private_key'] = 'tB1iOBjrDFMhmSifpVVD4nB36iTEwxHy2QM0juhT';
+$config['public_key'] = '';//Здесь public key liqpay
+$config['private_key'] = '';//Здесь private key liqpay
 
 /* End of file liqpay.php */
 /* Location: ./application/config/liqpay.php */
