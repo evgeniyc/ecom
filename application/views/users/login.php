@@ -16,10 +16,10 @@
 						'maxlength' => '16',
 						'size' => '16',
 					);
-					$this->load->library('table');
-						$this->table->add_row(form_label('Логин:&nbsp;', 'login'), form_input($data1));
-						$this->table->add_row(form_label('Пароль:&nbsp;', 'pass'), form_password($data2));
-						$this->table->add_row(form_submit('', 'Войти'));
+					
+					$this->table->add_row(form_label('Логин:&nbsp;', 'login'), form_input($data1));
+					$this->table->add_row(form_label('Пароль:&nbsp;', 'pass'), form_password($data2));
+					$this->table->add_row(form_submit('', 'Войти'));
 					echo $this->table->generate();?>
 				</form>
 	</fieldset>

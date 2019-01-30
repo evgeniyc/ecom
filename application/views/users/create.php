@@ -6,43 +6,37 @@
 		<?php	echo validation_errors();
 				echo form_open('users/create'); 
 				
-				echo form_label('Логин:&nbsp;', 'login');
-				$data = array(
+				$login = array(
 					'name' => 'login',
 					'maxlength' => '16',
 					'size' => '16',
 					'value' => set_value('login'),
 				);
-				echo form_input($data).'<br>';
-				
-				echo form_label('Пароль:&nbsp;', 'pass');
-				$data = array(
+				$pass = array(
 					'name' => 'pass',
 					'maxlength' => '16',
 					'size' => '16',
 					'value' => set_value('pass'),
 				);
-				echo form_input($data).'<br>';
-				
-				echo form_label('Подтверждение пароля:&nbsp;', 'passconf');
-				$data = array(
+				$passconf = array(
 					'name' => 'passconf',
 					'maxlength' => '16',
 					'size' => '16',
 					'value' => set_value('passconf'),
 				);
-				echo form_input($data).'<br>';
-				
-				echo form_label('Email:&nbsp;', 'email');
-				$data = array(
+				$email = array(
 					'name' => 'email',
 					'maxlength' => '24',
-					'size' => '24',
+					'size' => '16',
 					'value' => set_value('email'),
 				);
-				echo form_input($data).'<br>';
-		
-				echo form_submit('', 'Сохранить');?>
+				
+				$this->table->add_row(form_label('Логин:', 'login'), form_input($login));
+				$this->table->add_row(form_label('Пароль:', 'pass'), form_input($pass));
+				$this->table->add_row(form_label('Подтверждение пароля:', 'passconf'), form_input($passconf));
+				$this->table->add_row(form_label('Email:', 'email'), form_input($email));
+				$this->table->add_row(form_label(form_submit('', 'Сохранить')));
+				echo $this->table->generate();?>
 	</form>
 	</fieldset>
 </article>
