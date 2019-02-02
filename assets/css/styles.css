@@ -251,6 +251,11 @@ fieldset
 	padding: 5px;
 	margin: 5px;
 }
+article input
+{
+	border-radius: 5px;
+	box-shadow: 0 0 3px black;
+}
 .error
 {
 	color: red;

@@ -88,6 +88,7 @@ class Users extends CI_Controller {
 		public function login()
 		{
 			$this->load->library('form_validation');
+			$this->load->library('table');
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			
 			$this->form_validation->set_rules('login', 'Логин',	'required');
