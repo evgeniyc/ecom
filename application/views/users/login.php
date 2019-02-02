@@ -22,6 +22,5 @@
 				echo $this->table->generate();
 		?>
 			</form>
-		
 	</fieldset>
 </article>

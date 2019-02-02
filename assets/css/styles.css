@@ -260,3 +260,7 @@ article input
 {
 	color: red;
 }
+form
+{
+	border-radius: 5px;
+}

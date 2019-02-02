@@ -5,21 +5,21 @@ class Users_model extends CI_Model {
 	{
 			$this->load->database();
 	}
-	
+//Вывод всех пользователей	
 	public function get_users()
 	{
 		$this->db->select('id, login, email, status');
 		$query = $this->db->get('users');
 		return $query->result_array();
 	}
-	
+//Пользователь по идентификатору	
 	public function get_user()
 	{
 		$id = $this->input->post('id');
 		$request = $this->db->get_where('users', array('id' => $id));
 		return $request->row();
 	}
-	
+//Создание нового профиля пользователя	
 	public function create()
 	{	
 		$post = $this->input->post();
@@ -31,7 +31,7 @@ class Users_model extends CI_Model {
 		$this->db->set($array);
 		$this->db->insert('users');
 	}
-	
+//Аутентификация пользователя и установка данных сессии	
 	public function auth()
 	{	
 		$login = $this->input->post('login');
@@ -55,12 +55,12 @@ class Users_model extends CI_Model {
 			return $result;
 		endif;
 	}
-	
+//Редактирование статуса пользователя (user, editor, admin)	
 	public function edit_status()
 	{
 		$this->db->update('users', array('status' => $this->input->post('status')),'id='.$this->input->post('id'));
 	}
-	
+//Удаление пользователя	
 	public function delete()
 	{
 		$id = $this->input->post('login');

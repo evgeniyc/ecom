@@ -8,7 +8,7 @@ class Items extends CI_Controller {
 			$this->load->helper('url');
 			$this->load->helper('form');
 	}
-
+//Вывод моделей по бренду
 	public function index($brand)
 	{
 		$data['items'] = $this->items_model->get_items($brand);
@@ -29,7 +29,7 @@ class Items extends CI_Controller {
 		$this->load->view('items/index', $data);
 		$this->load->view('templates/footer');
 	}
-	
+//Вывод одной модели	
 	public function view($id)
 	{
 		$this->load->library('table');
@@ -53,7 +53,7 @@ class Items extends CI_Controller {
 		$this->load->view('items/view', $data);
 		$this->load->view('templates/footer');
 	}
-		
+//Создание модели		
 	public function create()
 	{
 		
@@ -94,7 +94,7 @@ class Items extends CI_Controller {
 			$this->load->view('templates/footer');
 		}
 	}
-		
+//Редактирование модели		
 	public function update()
 	{
 		$this->breadcrumbs->push('Категории', '/cats');
@@ -136,7 +136,7 @@ class Items extends CI_Controller {
 			$this->load->view('templates/footer');
 		}
 	}
-	
+//Изменение изображения модели	
 	public function editImg()
 	{
 		$this->breadcrumbs->push('Категории', '/cats');
@@ -178,7 +178,7 @@ class Items extends CI_Controller {
 			$this->load->view('templates/footer');
 		}
 	}
-	
+//Добавление характеристик модели	
 	public function charact()
 	{
 		
@@ -211,7 +211,7 @@ class Items extends CI_Controller {
 			$this->load->view('templates/footer');
 		}
 	}
-	
+//Редактирование характеристик модели	
 	public function updateCharact()
 	{
 		$this->breadcrumbs->push('Категории', '/cats');
@@ -243,7 +243,7 @@ class Items extends CI_Controller {
 			$this->load->view('templates/footer');
 		}
 	}
-	
+//Удаление модели	
 	public function delete()
 	{
 		$this->items_model->delete();
@@ -270,7 +270,7 @@ class Items extends CI_Controller {
 		endif;
 	}
 	
-	//Содержание корзины
+	//Вывод содержимого корзины
 	public function cart()
 	{
 		if($this->session->logged_in):
@@ -283,7 +283,7 @@ class Items extends CI_Controller {
 		endif;
 	}
 	
-	//Обновление содержания корзины по данным формы
+	//Обновление содержимого корзины по данным формы
 	public function cartUpdate()
 	{
 		if($this->session->logged_in):
