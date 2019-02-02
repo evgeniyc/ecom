@@ -3,7 +3,15 @@
 	<h3>Модель <?php echo $item->model; ?></h3>
 	<div id="item" class="row">
 		<div id="item_img" class="col-sm-6">
-			<img src="<?php echo base_url()."assets/img/items/".$item->thumb; ?>" alt="">
+			<!-- <img src="<?php echo base_url()."assets/img/items/".$item->thumb; ?>" alt=""> -->
+			
+			<!-- 2. Add images to <div class="fotorama"></div>. -->
+			<div class="fotorama"  data-nav="thumbs">
+				<img src="<?php echo base_url()."assets/img/items/".$item->thumb; ?>" alt="">
+				<img src="http://s.fotorama.io/1.jpg">
+				<img src="http://s.fotorama.io/2.jpg">
+			</div>
+
 		</div>
 		<div id="item_descr" class="col-sm-6">
 			<h4>Описание модели:</h4>
